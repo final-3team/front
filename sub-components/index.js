@@ -41,6 +41,8 @@ import Current from './contract/current';
 
 // sub components for /pages/current/storingcurrent
 import Button from './current/storing/Button';
+import Ex from './current/storing/ex';
+
 
 
 export {
@@ -64,10 +66,12 @@ export {
    Notifications, 
    Preferences,
    BSOffCanvas,   
-   Modals,
+   
 
    List1,
    List2,
    Current,
-   Button
+   Button,
+   Ex,
+   
 };

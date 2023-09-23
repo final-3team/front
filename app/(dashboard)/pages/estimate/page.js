@@ -2,8 +2,7 @@
 import { Row, Container, Card } from 'react-bootstrap';
 import { List1, List2 } from 'sub-components';
 import { PageHeading } from 'widgets';
-import ProjectsData from 'data/dashboard/ProjectsData';
-import Button from 'react-bootstrap';
+
 
 
 const Estimate = () => {

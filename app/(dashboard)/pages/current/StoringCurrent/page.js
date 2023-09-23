@@ -1,7 +1,8 @@
 'use client'
 import { Row, Container, Card } from 'react-bootstrap';
 import { PageHeading } from 'widgets';
-import { Button } from 'sub-components';
+import { Button, Ex } from 'sub-components';
+
 
 const StoringCurrent = () => {
     return (
@@ -14,6 +15,8 @@ const StoringCurrent = () => {
                         <Button />
                     </div>
                     
+                    
+                   
                 </div>
             </Container>
         )
