@@ -2,7 +2,7 @@
 import { Row, Container, Card } from 'react-bootstrap';
 import { List1, List2 } from 'sub-components';
 import { PageHeading } from 'widgets';
-import BasicData from 'data/dashboard/basicdate';
+import ProjectsData from 'data/dashboard/basicdate';
 import Button from 'react-bootstrap';
 
 
