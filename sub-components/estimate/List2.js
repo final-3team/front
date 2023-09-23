@@ -1,6 +1,6 @@
 import { Row, Col, Card, Table } from "react-bootstrap";
 import Button from "react-bootstrap";
-import BasicData from "data/dashboard/basicdate";
+import ProjectsData from "data/dashboard/ProjectsData";
 import Modal from 'react-bootstrap/Modal';
 import React, { useState } from 'react';
 
@@ -32,7 +32,7 @@ const List2 = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {BasicData.map((item, index) => {
+                            {ProjectsData.map((item, index) => {
                                 return (
                                     <tr key={index}>
                                         <td className="align-middle">{item.projectName}</td>

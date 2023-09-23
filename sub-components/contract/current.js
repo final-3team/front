@@ -1,6 +1,6 @@
 import { Row, Col, Card, Table } from "react-bootstrap";
 import Button from "react-bootstrap";
-import BasicData from "data/dashboard/basicdate";
+import ProjectsData from "data/dashboard/ProjectsData";
 import Link from "next/link";
 
 const Current = () => {
@@ -46,15 +46,15 @@ const Current = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {BasicData.map((item, index) => {
+                            {ProjectsData.map((item, index) => {
                                 return (
                                     <tr key={index}>
                                         <td className="align-middle">{item.company}</td>
-                                        <td className="align-middle">{item.contact}</td>
+                                        <td className="align-middle">{item.phone}</td>
                                         <td className="align-middle">{item.address}</td>
                                         <td className="align-middle">{item.storing_quantity}</td>
                                         <td className="align-middle">{item.classification}</td>
-                                        <td className="align-middle">{item.contac_date}</td>
+                                        <td className="align-middle">{item.contract_day}</td>
                                     </tr>
                                 )
                             })}

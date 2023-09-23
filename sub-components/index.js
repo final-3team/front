@@ -32,6 +32,14 @@ import { Dropdown, Container, Row, Col } from 'react-bootstrap';
 import { Fragment } from 'react';
 
 
+// sub components for /pages/estimate
+import List1 from './estimate/List1';
+import List2 from './estimate/List2';
+
+// sub components for /pages/contract
+import Current from './contract/current';
+
+
 export {
    ActiveProjects,
    TasksPerformance,
@@ -53,5 +61,9 @@ export {
    Notifications, 
    Preferences,
    BSOffCanvas,   
-   Modals
+   Modals,
+
+   List1,
+   List2,
+   Current
 };
