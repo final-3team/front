@@ -7,6 +7,19 @@
 import ActiveProjects from 'sub-components/dashboard/ActiveProjects';
 import TasksPerformance from 'sub-components/dashboard/TasksPerformance';
 import Teams from 'sub-components/dashboard/Teams';
+import StockCard from 'sub-components/dashboard/StockCard';
+
+// sub components for /pages/notice
+import NoticeTable from 'sub-components/notice/NoticeTable';
+import NoticeDetail from 'sub-components/notice/NoticeDetail';
+
+// sub components for /pages/qna
+import QnaTable from 'sub-components/qna/QnaTable';
+import QnaDetail from 'sub-components/qna/QnaDetail';
+
+// sub components for /pages/equipment-management
+import EquipmentTable from './eqipment-management/EquipmentTable';
+import EquipmentDetail from './eqipment-management/EquipmentDetail';
 
 // sub components for /pages/profile
 import AboutMe from 'sub-components/profile/AboutMe';
@@ -48,8 +61,18 @@ import Ex from './current/storing/ex';
 export {
    ActiveProjects,
    TasksPerformance,
-   Teams,
+   Teams,   
+   StockCard,
+
+   NoticeTable,
+   NoticeDetail,
+
+   QnaTable,
+   QnaDetail,
    
+   EquipmentTable,
+   EquipmentDetail,
+
    AboutMe,
    ActivityFeed,
    MyTeam,
@@ -72,6 +95,6 @@ export {
    List2,
    Current,
    Button,
-   Ex,
-   
+   Ex
+
 };

@@ -125,8 +125,14 @@ export const DashboardMenu = [
 	},	
 	{
 		id: uuid(),
-		title: '공지사항',
+		title: '창고관리',
 		grouptitle: true
+	},	
+	{
+		id: uuid(),
+		title: '기자재관리',
+		icon: 'git-pull-request',
+		link: '/equipment-management'
 	},
 	{
 		id: uuid(),
