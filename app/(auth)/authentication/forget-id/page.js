@@ -7,7 +7,7 @@ import Link from 'next/link';
 // import hooks
 import useMounted from 'hooks/useMounted';
 
-const ForgetPassword = () => {
+const ForgetID = () => {
   const hasMounted = useMounted();
   const h1style ={
     fontSize: '40px',
@@ -22,16 +22,16 @@ const ForgetPassword = () => {
           {/* Card body */}
           <Card.Body className="p-6">
             <div className="mb-4">
-              <p style={h1style}>비밀번호 찾기</p>
-              <p className="mb-6">다음 정보를 기입하면 비밀번호를 찾을 수 있습니다..</p>
+              <p style={h1style}>ID 찾기</p>
+              <p className="mb-6">다음 정보를 기입하면 ID를 찾을 수 있습니다.</p>
             </div>
             {/* Form */}
             {hasMounted && 
             <Form>
               {/* Email */}
-              <Form.Group className="mb-3" controlId="email">
-                <Form.Label>ID(Email)</Form.Label>
-                <Form.Control type="email" name="userid" placeholder="ID를 입력하세요" />
+              <Form.Group className="mb-3" controlId="username">
+                <Form.Label>이름</Form.Label>
+                <Form.Control type="text" name="username" placeholder="이름을 입력하세요" />
               </Form.Group>
 
               {/*number*/}
@@ -42,9 +42,9 @@ const ForgetPassword = () => {
 
               {/* Button */}
               <div className="mb-3 d-grid">
-                <Button variant="primary" type="submit">비밀번호 찾기</Button>
+                <Button variant="primary" type="submit">ID 찾기</Button>
               </div>
-              <span>로그인하시겠습니까?? <Link href="/authentication/sign-in">Login</Link></span>
+              <span>아직 회원이 아니신가요?? <Link href="/authentication/sign-up">가입하기</Link></span>
             </Form>
             }
           </Card.Body>
@@ -54,4 +54,4 @@ const ForgetPassword = () => {
   )
 }
 
-export default ForgetPassword
+export default ForgetID

@@ -49,12 +49,13 @@ export const DashboardMenu = [
 	},	
 	{
 		id: uuid(),
-		title: 'Authentication',
+		title: '회원관리',
 		icon: 'lock',
 		children: [
-			{ id: uuid(), link: '/authentication/sign-in', name: 'Sign In' },
-			{ id: uuid(), link: '/authentication/sign-up', name: 'Sign Up' },
-			{ id: uuid(), link: '/authentication/forget-password', name: 'Forget Password'}			
+			{ id: uuid(), link: '/authentication/sign-in', name: 'Login' },
+			{ id: uuid(), link: '/authentication/sign-up', name: '회원가입' },
+			{ id: uuid(), link: '/authentication/forget-id', name: 'ID찾기'},
+			{ id: uuid(), link: '/authentication/forget-password', name: '비밀번호 찾기'}			
 		]
 	},
 	{
@@ -101,34 +102,24 @@ export const DashboardMenu = [
 	},	
 	{
 		id: uuid(),
-		title: 'Menu Level',
+		title: '입고 및 계약',
 		icon: 'corner-left-down',
 		children: [
 			{ 
 				id: uuid(), 
-				link: '#', 
-				title: 'Two Level',
+				title: '현황',
 				children: [
-					{ id: uuid(), link: '#', name: 'NavItem 1'},
-					{ id: uuid(), link: '#', name: 'NavItem 2' }
+					{ id: uuid(), link: '/pages/contract', name: '계약현황'},
+					{ id: uuid(), link: '/pages/current/storing', name: '입고현황'}
 				]
 			},
 			{ 
 				id: uuid(), 
-				link: '#', 
-				title: 'Three Level',
+				title: '견적서 작성',
 				children: [
-					{ 
-						id: uuid(), 
-						link: '#', 
-						title: 'NavItem 1',
-						children: [
-							{ id: uuid(), link: '#', name: 'NavChildItem 1'},
-							{ id: uuid(), link: '#', name: 'NavChildItem 2'}
-						]
-					},
-					{ id: uuid(), link: '#', name: 'NavItem 2' }
+					{id: uuid(), link:'/pages/estimate', name: '작성하기'}
 				]
+				
 			}
 		]
 	},	
