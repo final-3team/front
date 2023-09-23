@@ -26,6 +26,10 @@ import EmailSetting from 'sub-components/settings/EmailSetting';
 import GeneralSetting from 'sub-components/settings/GeneralSetting';
 import Notifications from 'sub-components/settings/Notifications';
 import Preferences from 'sub-components/settings/Preferences';
+import BSOffCanvas from './dashboard/BSOffCanvas';
+import Modals from 'react-bootstrap';
+import { Dropdown, Container, Row, Col } from 'react-bootstrap';
+import { Fragment } from 'react';
 
 
 export {
@@ -47,5 +51,7 @@ export {
    EmailSetting,  
    GeneralSetting, 
    Notifications, 
-   Preferences
+   Preferences,
+   BSOffCanvas,   
+   Modals
 };

@@ -2,7 +2,7 @@
 // import node module libraries
 import { Fragment } from "react";
 import Link from 'next/link';
-import { Container, Col, Row, Nav } from 'react-bootstrap';
+import { Container, Col, Row } from 'react-bootstrap';
 
 // import widget/custom components
 import { StatRightTopIcon } from "widgets";
@@ -13,7 +13,8 @@ import { ActiveProjects, Teams,
 } from "sub-components";
 
 // import required data files
-import ProjectsStatsData from "data/dashboard/ProjectsStatsData";
+import ProjectsStatsData1 from "data/dashboard/ProjectsStatsData1";
+import ActiveProjects1 from "sub-components/dashboard/ActiveProjects1";
 
 const Home = () => {
     return (
@@ -26,26 +27,23 @@ const Home = () => {
                         <div>
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="mb-2 mb-lg-0">
-                                    <h3 className="mb-0  text-white">창고 이용 현황</h3>
-                                </div>
-                                <div>
-                                    <Link href="#" className="btn btn-white">문의하기</Link>
+                                    <h3 className="mb-0  text-white">창고관리</h3>
                                 </div>
                             </div>
                         </div>
                     </Col>
-                    {ProjectsStatsData.map((item, index) => {
+                    {ProjectsStatsData1.map((item, index) => {
                         return (
                             //3 6 12 12 
-                            <Col xl={6} lg={10} md={18} xs={18} className="mt-6" key={index}>
+                            <Col xl={3} lg={6} md={12} xs={12} className="mt-6" key={index}>
                                 <StatRightTopIcon info={item} />
                             </Col>
                         )
                     })}
                 </Row>
-                <Nav className="nav nav-tabs nav-justified mt-6" id="myTab" role="tablist"></Nav>
+
                 {/* Active Projects  */}
-                <ActiveProjects />
+                <ActiveProjects1 />
 
                 <Row className="my-6">
                     <Col xl={4} lg={12} md={12} xs={12} className="mb-6 mb-xl-0">

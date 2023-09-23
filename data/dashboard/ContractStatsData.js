@@ -5,21 +5,21 @@ import {
     Bullseye
 } from 'react-bootstrap-icons';
 
-export const ProjectsStats = [
+export const ReleaseStats = [
     {
        id:1,
-       title : "보관중인 물품",
-       value : 8,
+       title : "계약중인 물품",
+       value : 5,
        icon: <Briefcase size={18}/>,
-       statInfo: '<span className="text-dark me-2">출고대기 2 / 냉동 1 / 냉장 1 / 일반 3</span>' 
-    },
-    {
-        id:2,
-        title : "예상 비용",
-        value : "453,000원",
-        icon: <ListTask size={18}/>,
-        statInfo: '<span className="text-dark me-2">10월 27일 현재까지</span>' 
+       statInfo: '<span className="text-dark me-2">냉동 1 / 냉장 1 / 일반 3</span>' 
     }
+    // {
+    //     id:2,
+    //     title : "출고완료",
+    //     value : "7",
+    //     icon: <ListTask size={18}/>,
+    //     statInfo: '<span className="text-dark me-2">냉동 3 / 냉장 2 / 일반 2</span>' 
+    // }
    //   {
    //      id:3,
    //      title : "Teams",
@@ -35,4 +35,4 @@ export const ProjectsStats = [
    //      statInfo: '<span className="text-dark me-2">5%</span> Completed' 
    //   }
 ];
-export default ProjectsStats;
+export default ReleaseStats;

@@ -5,7 +5,7 @@ import { ProgressBar, Col, Row, Card, Table, Image } from 'react-bootstrap';
 // import required data files
 import ProjectsData from "data/dashboard/ProjectsData";
 
-const ActiveProjects = () => {
+const ReleaseRequestProjects = () => {
     return (
         <Row className="mt-6">
             <Col md={12} xs={12}>
@@ -16,30 +16,32 @@ const ActiveProjects = () => {
                     <Table responsive className="text-nowrap mb-0">
                         <thead className="table-light">
                             <tr>
-                                <th>상품이름</th>
-                                <th>상품분류</th>
-                                <th>보관기간</th>
+                                <th>#</th>
+                                <th>물품명</th>
+                                <th>물품종류</th>
+                                <th>신청수량</th>
+                                <th>위치</th>
                                 <th>입고일</th>
+                                <th>출고신청일</th>
                                 <th>출고예정일</th>
-                                <th>상태</th>
-                                <th>보관위치</th>
-                                <th>이번달 이용료</th>
-                                <th>계약내용 보기</th>
-                            </tr>
+                           </tr>
                         </thead>
                         <tbody>
                             {ProjectsData.map((item, index) => {
                                 return (
                                     <tr key={index}>
+                                        <td className="align-middle">{item.number}</td>
                                         <td className="align-middle">{item.projectName}</td>
                                         <td className="align-middle">{item.classification}</td>
-                                        <td className="align-middle">{item.period}</td>
-                                        <td className="align-middle">{item.storing}</td>
-                                        <td className="align-middle">{item.release}</td>
-                                        <td className="align-middle">{item.status}</td>
+                                        <td className="align-middle">{item.release_request_quantity}</td>
                                         <td className="align-middle">{item.location}</td>
-                                        <td className="align-middle">{item.fee}</td>
-                                        <td className="align-middle">{item.contract}</td>
+                                        <td className="align-middle">{item.storing}</td>
+                                        <td className="align-middle">{item.release_request_day}</td>
+                                        <td className="align-middle">{item.releaseday}</td>
+
+
+
+
 
 
                                     </tr>
@@ -56,4 +58,4 @@ const ActiveProjects = () => {
     )
 }
 
-export default ActiveProjects
+export default ReleaseRequestProjects
