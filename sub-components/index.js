@@ -8,6 +8,14 @@ import ActiveProjects from 'sub-components/dashboard/ActiveProjects';
 import TasksPerformance from 'sub-components/dashboard/TasksPerformance';
 import Teams from 'sub-components/dashboard/Teams';
 
+// sub components for /pages/notice
+import NoticeTable from 'sub-components/notice/NoticeTable';
+import NoticeDetail from 'sub-components/notice/NoticeDetail';
+
+// sub components for /pages/qna
+import QnaTable from 'sub-components/qna/QnaTable';
+import QnaDetail from 'sub-components/qna/QnaDetail';
+
 // sub components for /pages/profile
 import AboutMe from 'sub-components/profile/AboutMe';
 import ActivityFeed from 'sub-components/profile/ActivityFeed';
@@ -26,16 +34,18 @@ import EmailSetting from 'sub-components/settings/EmailSetting';
 import GeneralSetting from 'sub-components/settings/GeneralSetting';
 import Notifications from 'sub-components/settings/Notifications';
 import Preferences from 'sub-components/settings/Preferences';
-import BSOffCanvas from './dashboard/BSOffCanvas';
-import Modals from 'react-bootstrap';
-import { Dropdown, Container, Row, Col } from 'react-bootstrap';
-import { Fragment } from 'react';
 
 
 export {
    ActiveProjects,
    TasksPerformance,
    Teams,
+
+   NoticeTable,
+   NoticeDetail,
+
+   QnaTable,
+   QnaDetail,
    
    AboutMe,
    ActivityFeed,
@@ -51,7 +61,5 @@ export {
    EmailSetting,  
    GeneralSetting, 
    Notifications, 
-   Preferences,
-   BSOffCanvas,   
-   Modals
+   Preferences
 };

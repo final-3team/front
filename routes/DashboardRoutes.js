@@ -125,20 +125,20 @@ export const DashboardMenu = [
 	},	
 	{
 		id: uuid(),
-		title: 'Documentation',
+		title: '공지사항',
 		grouptitle: true
 	},
 	{
 		id: uuid(),
-		title: 'Docs',
-		icon: 'clipboard',
-		link: '/documentation'
+		title: '공지사항',
+		icon: 'git-pull-request',
+		link: '/notice'
 	},
 	{
 		id: uuid(),
-		title: 'Changelog',
+		title: '문의사항',
 		icon: 'git-pull-request',
-		link: '/changelog'
+		link: '/qna'
 	},
 	{
 		id: uuid(),
