@@ -39,6 +39,9 @@ import List2 from './estimate/List2';
 // sub components for /pages/contract
 import Current from './contract/current';
 
+// sub components for /pages/current/storingcurrent
+import Button from './current/storing/Button';
+
 
 export {
    ActiveProjects,
@@ -65,5 +68,6 @@ export {
 
    List1,
    List2,
-   Current
+   Current,
+   Button
 };

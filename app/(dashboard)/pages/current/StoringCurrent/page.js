@@ -1,7 +1,7 @@
 'use client'
 import { Row, Container, Card } from 'react-bootstrap';
 import { PageHeading } from 'widgets';
-import { Button, Sa, Sb } from 'sub-components';
+import { Button } from 'sub-components';
 
 const StoringCurrent = () => {
     return (
