@@ -46,22 +46,22 @@ const Home = () => {
                 </Row>
 
 
-                <BSOffCanvas />
+                {/* <BSOffCanvas /> */}
 
             
-                <Dropdown>
+                {/* <Dropdown>
                     <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                         창고
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                        <Dropdown.Item href="#">서울A</Dropdown.Item>
+                        <Dropdown.Item href="\create\stock\seoulA">서울A</Dropdown.Item>
                         <Dropdown.Item href="#">서울B</Dropdown.Item>
                         <Dropdown.Item href="#">대전A</Dropdown.Item>
                         <Dropdown.Item href="#">대전B</Dropdown.Item>
                         <Dropdown.Item href="#">부산A</Dropdown.Item>
                         <Dropdown.Item href="#">부산B</Dropdown.Item>
                     </Dropdown.Menu>
-                </Dropdown>
+                </Dropdown> */}
 
                 {/* Active Projects  */}
                 <StockProjects />
@@ -69,19 +69,16 @@ const Home = () => {
 
 
                 <Row className="my-6">
-                    <Col xl={4} lg={12} md={12} xs={12} className="mb-6 mb-xl-0">
+                    {/* <Col xl={4} lg={12} md={12} xs={12} className="mb-6 mb-xl-0">
 
-                        {/* Tasks Performance  */}
-                        {/* <TasksPerformance /> */}
 
-                    </Col>
-                    {/* card  */}
-                    <Col xl={8} lg={12} md={12} xs={12}>
+                    </Col> */}
 
-                        {/* Teams  */}
-                        {/* <Teams /> */}
+                    {/* <Col xl={8} lg={12} md={12} xs={12}>
 
-                    </Col>
+
+
+                    </Col> */}
                 </Row>
             </Container>
         </Fragment>
