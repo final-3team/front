@@ -14,7 +14,7 @@ const StockCard = () => {
                                 <Card.Text>
                                     <tbody>
                                         {ProjectsData.map((item, index) => {
-                                            if(item.location == "인천-1동-1층"){
+                                            if(item.location == "대전-2동-6층-1번"){
                                             return (
                                             <tr key={index}>
                                                 <td className="align-middle">{item.projectName+"("+item.classification+")"}</td>
