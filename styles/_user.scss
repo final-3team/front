@@ -2,3 +2,24 @@
 // user.scss
 // Use this to write your custom SCSS
 //
+
+//NoticeTable
+.createNotice {
+    display: block;
+    margin-left: auto;
+    text-align: center;
+}
+
+//NoticeDetail
+.noticeContent {
+    width: 30%;
+    height: 400px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.postNotice {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
