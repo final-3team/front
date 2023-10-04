@@ -109,7 +109,7 @@ export const DashboardMenu = [
 				id: uuid(), 
 				title: '현황',
 				children: [
-					{ id: uuid(), link: '/pages/contract', name: '계약현황'},
+					{ id: uuid(), link: '/pages/current/contract', name: '계약현황'},
 					{ id: uuid(), link: '/pages/current/StoringCurrent', name: '입고현황'}
 				]
 			},

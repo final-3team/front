@@ -18,7 +18,7 @@ const Modals = (stockData) => {
             <Modal.Body>
             
                   {ProjectsData.map((item, index) => {
-                      if(item.location == "인천-1동-1층"){
+                      if(item.locnatio == "인천-1동-1층"){
                                         return (
                                         <tr key={index}>
                                         <td className="align-bottom">{item.number}</td>

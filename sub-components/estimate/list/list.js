@@ -60,6 +60,7 @@ const List = props => {
                     </Modal.Header>
                     <Modal.Body>견적내용 및 주의사항</Modal.Body>
                     <Modal.Footer>
+                        <a href="/pages/contract">진행</a>
                         <button className="btn_close" variant="secondary" onClick={handleClose}>
                             닫기
                         </button>
