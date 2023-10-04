@@ -8,42 +8,13 @@ import Modals from './Modals';
 import ProjectsData from "data/dashboard/ProjectsData";
 import StockCard from './StockCard';
 
+const dataList = ProjectsData.map((data) => (<StockCard id={data.id} projectName={data.projectName}/>))
 
 const StockProjects = () => {
     return (
         <Row className="mt-6">
-            <Col md={1} xs={1}>
-                
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <br></br>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <br></br>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-                <td><StockCard/></td>
-
+            <Col md={1} xs={1}>                
+                {dataList}
             </Col>
         </Row>
 
