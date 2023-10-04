@@ -1,5 +1,15 @@
 'use client'
 
+import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
+//import { HiLockClosed } from 'react-icons/hi'
+//import { ErrorMessage } from '@hookform/error-message';
+
+import { loginUser } from 'app/api/User';
+import { SET_TOKEN } from 'sub-components/auth/token/accessToken';
+import { setRefreshToken } from 'sub-components';
+
 // import node module libraries
 import { Row, Col, Card, Form, Button, Image } from 'react-bootstrap';
 import Link from 'next/link';
@@ -12,10 +22,29 @@ import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
 
 const SignIn = () => {
   const hasMounted = useMounted();
-  const h1style ={
+  const h1style = {
     fontSize: '40px',
     fontWeight: 'bold',
     color: 'blue'
+  };
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { register, setValue, formState: { errors }, handleSubmit } = useForm();
+
+  const onValid = async ({ userid, password }) => {
+    setValue("password", "");
+
+    const response = await loginUser({ userid, password });
+
+    if (response.status) {
+      setRefreshToken(response.json.refresh_token);
+      dispatch(SET_TOKEN(response.json.accesstoken));
+
+      return navigate("/");
+    } else {
+      console.log(response.json);
+    }
   };
 
   return (
