@@ -1,23 +1,26 @@
 'use client'
-import { Row, Container, Card } from 'react-bootstrap';
-import { List1, List2 } from 'sub-components';
-import { PageHeading } from 'widgets';
+import React, {useState} from 'react';
+import { New } from 'sub-components';
+import ProjectsData from 'data/dashboard/ProjectsData';
+import List from 'sub-components/estimate/list/list';
 
 
 
 const Estimate = () => {
+    const [datas, setDatas] = useState(ProjectsData);
+
+    const addEstimateDataHandler = (data) => {
+        setDatas((prevDatas) => {
+            return [data, ...prevDatas];
+        });
+    };
+
     return (
-        <Container fluid className="p-6">
-            <PageHeading heading="견적서 작성" />
-            {/* content */}
-            <div className="py-6">
-
-                <List1 />
-                <List2 />
-
-            </div>
-        </Container>
-    )
+        <div>
+            <New OnAddList={addEstimateDataHandler}/>
+            <List items = {datas}/>
+        </div>
+    );
 }
 
-export default Estimate
+export default Estimate;

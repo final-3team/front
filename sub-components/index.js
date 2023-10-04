@@ -45,9 +45,6 @@ import { Dropdown, Container, Row, Col } from 'react-bootstrap';
 import { Fragment } from 'react';
 
 
-// sub components for /pages/estimate
-import List1 from './estimate/List1';
-import List2 from './estimate/List2';
 
 // sub components for /pages/contract
 import Current from './contract/current';
@@ -60,7 +57,11 @@ import Ex from './current/storing/ex';
 import accessToken from './auth/token/accessToken';
 import { setRefreshToken, getCookieToken, removeCookieToken } from './auth/token/refreshToken';
 
-
+// sub components for /pages/estimate
+import Basic from './estimate/form/basic';
+import New from './estimate/form/new';
+import Items from './estimate/items/items';
+import List from './estimate/list/list';
 
 export {
    ActiveProjects,
@@ -95,8 +96,7 @@ export {
    BSOffCanvas,   
    
 
-   List1,
-   List2,
+  
    Current,
    Button,
    Ex,
@@ -104,7 +104,12 @@ export {
    accessToken,
    setRefreshToken,
    getCookieToken,
-   removeCookieToken
+   removeCookieToken,
+
+   Basic,
+   New,
+   Items,
+   List
 
 
 
