@@ -1,5 +1,5 @@
 // import node module libraries
-import { Fragment } from 'react';
+import { Fragment ,useState } from 'react';
 import { Col, Row, Card, Table, Nav, Tab, Container, Button } from 'react-bootstrap';
 
 // import widget/custom components
@@ -27,6 +27,14 @@ import {
 import NoticeData from 'data/dashboard/NoticeData';
 
 const NoticeTable = () => {
+    // 선택한 테이블 값을 state로 정의
+    const [selectedNotice, setSelectedNotice] = useState(null);
+
+    // 선택한 테이블 값을 변경하는 함수
+    const handleTableSelection = (notice) => {
+        setSelectedNotice(notice);
+    };
+
 	return (
         <><Col xl={8} lg={12} md={12} sm={12}>
             <Card>
@@ -42,7 +50,7 @@ const NoticeTable = () => {
                         </thead>
                         <tbody>
                             {NoticeData.map((x, i) =>
-                            <tr key={i}>
+                             <tr key={i} onClick={() => handleTableSelection(x)}>
                                 <th scope="row">{x.id}</th>
                                 <td>{x.title}</td>
                                 <td>{x.writer}</td>
@@ -50,11 +58,11 @@ const NoticeTable = () => {
                             </tr>)}
                         </tbody>
                     </Table>
-                    <Button variant="secondary" className='createNotice'>글쓰기</Button>
+                    <Button variant="secondary" className='createBtn'>글쓰기</Button>
                 </Card.Body>
             </Card>
-        </Col>
-        <NoticeDetail /></>
+        </Col>        
+        {selectedNotice && <NoticeDetail selectedNotice={selectedNotice} />}</>
 	);
 };
 

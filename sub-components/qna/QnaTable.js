@@ -1,5 +1,5 @@
 // import node module libraries
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { Col, Row, Card, Table, Nav, Tab, Container, Button } from 'react-bootstrap';
 
 // import widget/custom components
@@ -24,44 +24,24 @@ import {
 import {
     QnaDetail
   } from 'sub-components'
+import NoticeData from 'data/dashboard/NoticeData';
 
-const noticeContent = {
-    no : '1',
-    title : '공지입니다',
-    writer : '작성자',
-    date : '작성일'
-}
-
-function List() {
-    const noticeContent = {
-        no : '1',
-        title : '공지입니다',
-        writer : '작성자',
-        date : '작성일'
-    }
-}
-
-function tableContent() {
-    return (
-        <tr>
-            <th scope="row">1</th>
-            <td>공지입니다</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-    )
-}
 
 const QnaTable = () => {
+    // 선택한 테이블 값을 state로 정의
+    const [selectedQna, setSelectedQna] = useState(null);
+
+    // 선택한 테이블 값을 변경하는 함수
+    const handleTableSelection = (qna) => {
+        setSelectedQna(qna);
+    };
+
 	return (
         <><Col xl={8} lg={12} md={12} sm={12}>
             <Card>
                 <Card.Body>
                     <Table hover className="text-nowrap">
                         <thead className="table-light">
-                            {
-                                
-                            }
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">제목</th>
@@ -70,73 +50,20 @@ const QnaTable = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>공지입니다</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">5</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">6</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">7</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">8</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">9</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">10</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+                            {NoticeData.map((x, i) =>
+                             <tr key={i} onClick={() => handleTableSelection(x)}>
+                                <th scope="row">{x.id}</th>
+                                <td>{x.title}</td>
+                                <td>{x.writer}</td>
+                                <td>{x.date}</td>
+                            </tr>)}
                         </tbody>
                     </Table>
-                    <Button variant="secondary" className='createNotice'>글쓰기</Button>
+                    <Button variant="secondary" className='createBtn'>글쓰기</Button>
                 </Card.Body>
             </Card>
-        </Col>
-        <QnaDetail /></>
+        </Col>        
+        {selectedQna && <QnaDetail selectedQna={selectedQna} />}</>
 	);
 };
 
