@@ -1,6 +1,5 @@
 'use client'
 
-import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 //import { HiLockClosed } from 'react-icons/hi'
@@ -9,6 +8,8 @@ import { useForm } from 'react-hook-form';
 import { loginUser } from 'app/api/User';
 import { SET_TOKEN } from 'sub-components/auth/token/accessToken';
 import { setRefreshToken } from 'sub-components';
+
+import { useRouter } from "next/navigation";
 
 // import node module libraries
 import { Row, Col, Card, Form, Button, Image } from 'react-bootstrap';
@@ -27,25 +28,36 @@ const SignIn = () => {
     fontWeight: 'bold',
     color: 'blue'
   };
-  const navigate = useNavigate();
+
+  const router = useRouter();
+
   const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isSubmitting, isDirty, isValid },
+  } = useForm({ mode: 'onChange' });
 
-  const { register, setValue, formState: { errors }, handleSubmit } = useForm();
+  
+  const onSubmit = async data => {
+    const response = await loginUser({ userId: data.email, password: data.password });
+    
 
-  const onValid = async ({ userid, password }) => {
-    setValue("password", "");
+    const result = response.json;
 
-    const response = await loginUser({ userid, password });
-
-    if (response.status) {
-      setRefreshToken(response.json.refresh_token);
-      dispatch(SET_TOKEN(response.json.accesstoken));
-
-      return navigate("/");
-    } else {
-      console.log(response.json);
-    }
+    if (result.code === 'OK') {
+      dispatch(SET_TOKEN(result.data.accessToken));
+      console.log(result.data.accessToken);
+      typeof window !== 'undefined' ? sessionStorage.setItem("accessToken", result.data.accessToken) : null;
+      
+      router.push("/");
+      
+    } 
   };
+  const onError = errors => console.log(errors);
+
+
 
   return (
     <Row className="align-items-center justify-content-center g-0 min-vh-100">
@@ -60,17 +72,33 @@ const SignIn = () => {
             </div>
             {/* Form */}
             {hasMounted &&
-              <Form>
+              <Form onSubmit={handleSubmit(onSubmit, onError)}>
                 {/* Username */}
                 <Form.Group className="mb-3" controlId="userid">
                   <Form.Label>ID(email)</Form.Label>
-                  <Form.Control type="email" name="userid" placeholder="Enter address here" required="" />
+                  <Form.Control 
+                  type="email" 
+                  name="userid" 
+                  placeholder="Enter address here" 
+                  required="" 
+                  {...register('email', {
+                    required: true,
+                  })}
+                  />
                 </Form.Group>
 
                 {/* Password */}
                 <Form.Group className="mb-3" controlId="password">
                   <Form.Label>비밀번호</Form.Label>
-                  <Form.Control type="password" name="password" placeholder="**************" required="" />
+                  <Form.Control 
+                  type="password" 
+                  name="password" 
+                  placeholder="**************" 
+                  required="" 
+                  {...register('password', {
+                    required: true,
+                  })}
+                  />
                 </Form.Group>
 
                 {/* Checkbox */}
@@ -83,7 +111,7 @@ const SignIn = () => {
                 <div>
                   {/* Button */}
                   <div className="d-grid">
-                    <Button variant="primary" type="submit">Login</Button>
+                    <Button variant="primary" type='submit' >Login</Button>
                   </div>
                   <div className="d-md-flex justify-content-between mt-4">
                     <div className="mb-2 mb-md-0">

@@ -3,6 +3,9 @@
 // import node module libraries
 import { Row, Col, Card, Form, Button, Image } from 'react-bootstrap';
 import Link from 'next/link';
+import { useForm } from 'react-hook-form';
+import { signupUser } from 'app/api/User';
+import { useDispatch } from 'react-redux';
 
 // import hooks
 import useMounted from 'hooks/useMounted';
@@ -14,6 +17,38 @@ const SignUp = () => {
     fontWeight: 'bold',
     color: 'blue'
   };
+
+  const dispatch = useDispatch();
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isSubmitting, isDirty, isValid },
+  } = useForm({ mode: 'onChange' });
+
+  const onSubmit = async data => {
+    const response = await signupUser({ 
+      emailAddress: data.email, 
+      password: data.password,
+      phoneNumber: data.phoneNumber,
+      userId: data.email,
+      userName: data.userName,
+     });
+    
+
+    const result = response.json;
+
+    if (result.code === 'OK') {
+      
+      router.push("/authentication/sign-in");
+      
+    } 
+  };
+  const onError = errors => console.log(errors);
+
+
+
   return (
     <Row className="align-items-center justify-content-center g-0 min-vh-100">
       <Col xxl={4} lg={6} md={8} xs={12} className="py-8 py-xl-0">
@@ -27,18 +62,34 @@ const SignUp = () => {
             </div>
             {/* Form */}
             {hasMounted && 
-            <Form>
+            <Form onSubmit={handleSubmit(onSubmit, onError)}>
               {/* UserID */}
               <Form.Group className="mb-3" controlId="userid">
                 <Form.Label>ID(email)</Form.Label>
-                <Form.Control type="email" name="userid" placeholder="ID(email)를 기입하세요" required="" />
+                <Form.Control 
+                type="email" 
+                name="userid" 
+                placeholder="ID(email)를 기입하세요" 
+                required="" 
+                {...register('email', {
+                  required: true,
+                })}
+                />
               </Form.Group>
 
 
               {/* Password */}
               <Form.Group className="mb-3" controlId="password">
                 <Form.Label>비밀번호</Form.Label>
-                <Form.Control type="password" name="password" placeholder="**************" required="" />
+                <Form.Control 
+                type="password" 
+                name="password"
+                placeholder="**************" 
+                required="" 
+                {...register('password', {
+                  required: true,
+                })}
+                />
               </Form.Group>
 
               {/* Confirm Password */}
@@ -50,23 +101,31 @@ const SignUp = () => {
               {/* Username */}
               <Form.Group className="mb-3" controlId="username">
                 <Form.Label>이름</Form.Label>
-                <Form.Control type="text" name="username" placeholder="이름을 기입하세요" required="" />
+                <Form.Control 
+                type="text" 
+                name="username"
+                placeholder="이름을 기입하세요" 
+                required=""
+                {...register('userName', {
+                  required: true,
+                })}
+                 />
               </Form.Group>
 
               {/*number*/}
               <Form.Group className='mb-3' controlId='phone-number'>
                 <Form.Label>전화번호</Form.Label>
-                <Form.Control type='text' name='phone-number' placeholder='전화번호를 적으세요' required=""/>
+                <Form.Control 
+                type='text' 
+                name='phone-number' 
+                placeholder='전화번호를 적으세요' 
+                required=""
+                {...register('phoneNumber', {
+                  required: true,
+                })}
+                />
               </Form.Group>
 
-              {/* Address */}
-              <Form.Group className="mb-3" controlId="address">
-                <Form.Label>주소</Form.Label>
-                <Form.Control type="text" name="address" placeholder="주소를 검색하세요" required="" />
-                <Form.Control type="text" name="address" placeholder="상세주소를 기입하세요" required="" />
-              </Form.Group>
-
-            
               {/* Checkbox */}
               <div className="mb-3">
                 <Form.Check type="checkbox" id="check-api-checkbox">
