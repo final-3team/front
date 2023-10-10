@@ -27,49 +27,17 @@ const getPromise = async (url, option) => {
                               ]);
 };
 
-// 백으로 로그인 요청
-export const loginUser = async (credentials) => {
+// 백으로 공지 목록 요청
+export const getNotices = async () => {
     const option = {
-        method: 'POST',
+        method: 'GET',
         headers: {
-            'Content-Type': 'application/json;charset=UTF-8'
-        },
-        body: JSON.stringify(credentials)
+            'Content-Type': 'application/json;charset=UTF-8',
+            'Authorization': sessionStorage.getItem("accessToken")
+        }
     };
 
-    const data = await getPromise('http://222.98.255.30:23233/api/v2/auth/sign-in', option, ).catch(() => {
-        return statusError;
-    });
-
-    if (parseInt(Number(data.status)/100)===2) {
-        const status = data.ok;
-        const code = data.status;
-        const text = await data.text();
-        const json = text.length ? JSON.parse(text) : "";
-
-        return {
-            status,
-            code,
-            json
-        };
-    } else {
-        return statusError;
-    }
-};
-
-
-
-// 백으로 회원가입 요청
-export const signupUser = async (credentials) => {
-    const option = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json;charset=UTF-8'
-        },
-        body: JSON.stringify(credentials)
-    };
-
-    const data = await getPromise('http://222.98.255.30:23233/api/v2/auth/sign-up', option, ).catch(() => {
+    const data = await getPromise('http://222.98.255.30:23233/api/v2/community/post?postSeq=2', option, ).catch(() => {
         return statusError;
     });
 
