@@ -11,7 +11,7 @@
 }
 
 //NoticeDetail
-.noticeContent {
+.content {
     width: 30%;
     height: 400px;
     text-align: center;
@@ -23,3 +23,15 @@
     margin: 0 auto;
     text-align: center;
 }
+
+//CreateNotice
+.createNoticeHeight {
+    height: 400px;        
+}
+
+// 가운데 정렬
+.textCenter {
+    text-align: center;
+    vertical-align: middle;
+}
+

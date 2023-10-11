@@ -10,23 +10,22 @@ import { PageHeading } from 'widgets'
 
 // import sub components
 import {
-  NoticeTable,
-  NoticeDetail
+  NoticeTable
 } from 'sub-components'
 
 const Profile = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    async function getAndSetNotices() { 
-      const result = await getNotices();
-      console.log(result.json.data);
+  // useEffect(() => {
+  //   async function getAndSetNotices() { 
+  //     const result = await getNotices();
+  //     console.log(result.json.data);
 
-      // 리덕스를 이용해서 state에 값 설정
-      dispatch(SET_NOTICES(result.json.data));
-    }
-    getAndSetNotices(); 
-  },[])
+  //     // 리덕스를 이용해서 state에 값 설정
+  //     dispatch(SET_NOTICES(result.json.data));
+  //   }
+  //   getAndSetNotices(); 
+  // },[])
 
   return (
     <Container fluid className="p-6">

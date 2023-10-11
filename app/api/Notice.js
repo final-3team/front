@@ -36,8 +36,38 @@ export const getNotices = async () => {
             'Authorization': sessionStorage.getItem("accessToken")
         }
     };
+    const data = await getPromise('http://localhost:8080/api/v2/community/postList?page=0&size=5', option, ).catch(() => {
+    // const data = await getPromise('http://222.98.255.30:23233/api/v2/community/postList?page=0&size=20', option, ).catch(() => {
+        return statusError;
+    });
 
-    const data = await getPromise('http://222.98.255.30:23233/api/v2/community/post?postSeq=2', option, ).catch(() => {
+    if (parseInt(Number(data.status)/100)===2) {
+        const status = data.ok;
+        const code = data.status;
+        const text = await data.text();
+        const json = text.length ? JSON.parse(text) : "";
+
+        return {
+            status,
+            code,
+            json
+        };
+    } else {
+        return statusError;
+    }
+};
+
+// 백으로 공지 요청
+export const getNotice = async () => {
+    const option = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            'Authorization': sessionStorage.getItem("accessToken")
+        }
+    };
+
+    const data = await getPromise('http://localhost:8080/api/v2/community/post?postSeq=2', option, ).catch(() => {
         return statusError;
     });
 
