@@ -4,6 +4,7 @@ import Modals from './Modals';
 import React, { Fragment } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 
+
 const StockCard = (props) => {
         return (
             <td>
@@ -11,11 +12,11 @@ const StockCard = (props) => {
                 <Col md={1} xs={1}>
                     <Card style={{ width: '9rem' }}>
                         <Card.Body>
-                            <Card.Title>인천 1동 1층</Card.Title>
+                            <Card.Title>{props.location}</Card.Title>
                             <Card.Text>                                
                                 <tbody>
                                         <tr>
-                                            <td className="align-middle">{props.id + props.projectName}</td>
+                                            <td className="align-middle">{props.id +'-' + props.projectName}</td>
                                         </tr>
                                 </tbody>
                             </Card.Text>

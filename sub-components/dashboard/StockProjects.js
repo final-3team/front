@@ -8,13 +8,14 @@ import Modals from './Modals';
 import ProjectsData from "data/dashboard/ProjectsData";
 import StockCard from './StockCard';
 
-const dataList = ProjectsData.map((data) => (<StockCard id={data.id} projectName={data.projectName}/>))
+const dataList = ProjectsData.map((data) => (<StockCard id={data.id} projectName={data.projectName} location={data.location}/>))
 
 const StockProjects = () => {
     return (
         <Row className="mt-6">
             <Col md={1} xs={1}>                
                 {dataList}
+                {/* {ProjectsData[0].location} */}
             </Col>
         </Row>
 
