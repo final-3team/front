@@ -28,7 +28,7 @@ const getPromise = async (url, option) => {
 };
 
 // 백으로 공지 목록 요청
-export const getNotices = async () => {
+export const getNotices = async (page, size) => {
     const option = {
         method: 'GET',
         headers: {
@@ -36,7 +36,7 @@ export const getNotices = async () => {
             'Authorization': sessionStorage.getItem("accessToken")
         }
     };
-    const data = await getPromise('http://localhost:8080/api/v2/community/postList?page=0&size=5', option, ).catch(() => {
+    const data = await getPromise(`http://localhost:8080/api/v2/community/postList?page=${page}&size=${size}`, option, ).catch(() => {
     // const data = await getPromise('http://222.98.255.30:23233/api/v2/community/postList?page=0&size=20', option, ).catch(() => {
         return statusError;
     });

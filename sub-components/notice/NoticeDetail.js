@@ -22,7 +22,7 @@ const NoticeDetail = ({ selectedNotice }) => {
                             </tr>
                             <tr>
                                 <th scope="row" className='textCenter'>작성자</th>
-                                <td>{selectedNotice.writer}</td>
+                                <td>{selectedNotice.userName}</td>
                             </tr>
                             <tr>
                                 <th scope="row" className='textCenter'>작성일</th>

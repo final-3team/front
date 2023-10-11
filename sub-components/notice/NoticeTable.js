@@ -9,24 +9,15 @@ import { SET_NOTICES } from 'redux/noticeSlice'
 
 // import sub components
 import { NoticeDetail, CreateNotice } from 'sub-components'
-import NoticeData from 'data/dashboard/NoticeData';
-
-// import react code data file
-import {
-	DefaultPaginationCode,
-	PaginationWithIconsCode,
-	DisabledActiveCode,
-	PaginationSizingCode,
-	PaginationSizingSmallCode,
-	AlignmentCode,
-	JustifyContentEndCode
-} from 'data/code/PaginationsCode';
 
 const NoticeTable = () => {
     // 선택한 테이블 값을 state로 정의
     const [selectedNotice, setSelectedNotice] = useState(null);
     const [selectedComponent, setSelectedComponent] = useState(null); // 추가: 선택한 컴포넌트를 관리하는 상태
     const [showDataList, setshowDataList] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [pageSize, setPageSize] = useState(5); // 페이지 크기를 설정합니다.
+
     // 선택한 테이블 값을 변경하는 함수
     const handleTableSelection = (notice) => {
         setSelectedComponent('');
@@ -42,18 +33,22 @@ const NoticeTable = () => {
 
     useEffect(() => {
         async function getAndSetNotices() { 
-            const result = await getNotices();
-            console.log(result.json.data);
-            if (Array.isArray(result.json.data)) {
+            const result = await getNotices(currentPage, pageSize); // 페이지 및 페이지 크기를 요청에 추가
+            console.log(result.json.data.posts);
+            if (Array.isArray(result.json.data.posts)) {
                 console.log("if문 안으로 들어옴");
-                setshowDataList(result.json.data);
+                setshowDataList(result.json.data.posts);
               }
 
             // 리덕스를 이용해서 state에 값 설정
             dispatch(SET_NOTICES(result.json.data));
         }
         getAndSetNotices();
-    },[])
+    }, [currentPage, pageSize]); // currentPage 및 pageSize가 변경될 때마다 실행
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
 
 	return (
         <><Col xl={8} lg={12} md={12} sm={12}>
@@ -69,24 +64,41 @@ const NoticeTable = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {showDataList.map((x, i) =>
+                            {showDataList && showDataList.map((x, i) =>
                              <tr key={i} onClick={() => handleTableSelection(x)}>
-                                <th scope="row">{x.id}</th>
+                                <th scope="row">{x.postSeq}</th>
                                 <td>{x.title}</td>
                                 <td>{x.userName}</td>
-                                <td>{x.postSeq}</td>
+                                <td>{x.create_at}</td>
                             </tr>)}
                         </tbody>
                     </Table>
                     <Button variant="secondary" className="createBtn" onClick={showCreateNotice}>
                         글쓰기
                     </Button>
+                    {/* Pagination 컴포넌트를 추가하여 페이지를 변경할 수 있도록 합니다. */}
                     <Pagination className="justify-content-center">
-                        <Pagination.Prev disabled>Previous</Pagination.Prev> 
-                        <Pagination.Item>{1}</Pagination.Item>
-                        <Pagination.Item>{2}</Pagination.Item>                                
-                        <Pagination.Item>{3}</Pagination.Item>      
-                        <Pagination.Next>Next</Pagination.Next>
+                        <Pagination.Prev
+                            disabled={currentPage === 1}
+                            onClick={() => handlePageChange(currentPage - 1)}
+                        >
+                            Previous
+                        </Pagination.Prev>
+                        {Array.from({ length: Math.ceil(showDataList.length / pageSize) }).map((_, index) => (
+                            <Pagination.Item
+                                key={index}
+                                active={currentPage === index + 1}
+                                onClick={() => handlePageChange(index + 1)}
+                            >
+                                {index + 1}
+                            </Pagination.Item>
+                        ))}
+                        <Pagination.Next
+                            disabled={currentPage === Math.ceil(showDataList.length / pageSize)}
+                            onClick={() => handlePageChange(currentPage + 1)}
+                        >
+                            Next
+                        </Pagination.Next>
                     </Pagination>
                 </Card.Body>
             </Card>
