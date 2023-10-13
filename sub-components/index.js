@@ -62,6 +62,8 @@ import Basic from './estimate/form/basic';
 import New from './estimate/form/new';
 import Items from './estimate/items/items';
 import List from './estimate/list/list';
+import { makePdf } from './estimate/contractPDF/make_pdf';
+import { ContentsPdf } from './estimate/contractPDF/contents_pdf';
 
 export {
    ActiveProjects,
@@ -109,7 +111,9 @@ export {
    Basic,
    New,
    Items,
-   List
+   List,
+   makePdf,
+   ContentsPdf
 
 
 
