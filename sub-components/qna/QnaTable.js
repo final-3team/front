@@ -2,38 +2,24 @@
 import { Fragment, useState } from 'react';
 import { Col, Row, Card, Table, Nav, Tab, Container, Button } from 'react-bootstrap';
 
-// import widget/custom components
-import { HighlightCode }  from 'widgets';
-
-// import react code data file
-import {
-	BasicTableCode,
-	DarkTableCode,
-	TableHeadCode,
-	StripedTableCode,
-	TableVariantCode,
-	BorderedTableCode,
-	BorderlessTableCode,
-	HoverableRowsCode,
-	SmallTableCode,
-	ContextualClassesCode,
-	ResponsiveTableCode
-} from 'data/code/TablesCode';
-
 // import sub components
-import {
-    QnaDetail
-  } from 'sub-components'
+import { QnaDetail, CreateQna } from 'sub-components'
 import NoticeData from 'data/dashboard/NoticeData';
-
 
 const QnaTable = () => {
     // 선택한 테이블 값을 state로 정의
     const [selectedQna, setSelectedQna] = useState(null);
+    const [selectedComponent, setSelectedComponent] = useState(null); // 추가: 선택한 컴포넌트를 관리하는 상태
 
     // 선택한 테이블 값을 변경하는 함수
     const handleTableSelection = (qna) => {
+        setSelectedComponent('');
         setSelectedQna(qna);
+    };
+
+    // 글쓰기 버튼 클릭 시 CreateQna 컴포넌트를 보여주는 함수
+    const showCreateQna = () => {
+        setSelectedComponent('CreateQna');
     };
 
 	return (
@@ -58,13 +44,20 @@ const QnaTable = () => {
                                 <td>{x.date}</td>
                             </tr>)}
                         </tbody>
-                    </Table>
-                    <Button variant="secondary" className='createBtn'>글쓰기</Button>
+                        </Table>
+                    <Button variant="secondary" className="createBtn" onClick={showCreateQna}>
+                        글쓰기
+                    </Button>
                 </Card.Body>
             </Card>
         </Col>        
-        {selectedQna && <QnaDetail selectedQna={selectedQna} />}</>
-	);
+        {selectedComponent === 'CreateQna' ? (
+        <CreateQna /> // CreateNotice 컴포넌트를 선택한 경우에만 보여줍니다.
+      ) : (
+        selectedQna && <QnaDetail selectedQna={selectedQna} />
+      )}
+    </>
+  );
 };
 
 export default QnaTable

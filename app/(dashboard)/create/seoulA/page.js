@@ -27,10 +27,8 @@ import { ActiveProjects, Teams,
 import ProjectsStatsData1 from "data/dashboard/ProjectsStatsData1";
 import StockProjects from "sub-components/dashboard/StockProjects";
 
-
 const Home = () => {
     return (
-        
         <Fragment>
             <div className="bg-primary pt-10 pb-21"></div>
             <Container fluid className="mt-n22 px-6">
@@ -56,7 +54,7 @@ const Home = () => {
                         창고
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                        <Dropdown.Item href="\create\seoulA">서울A</Dropdown.Item>
+                        <Dropdown.Item href="create\seoulA">서울A</Dropdown.Item>
                         <Dropdown.Item href="#">서울B</Dropdown.Item>
                         <Dropdown.Item href="#">대전A</Dropdown.Item>
                         <Dropdown.Item href="#">대전B</Dropdown.Item>

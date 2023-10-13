@@ -10,10 +10,12 @@ import Teams from 'sub-components/dashboard/Teams';
 import StockCard from 'sub-components/dashboard/StockCard';
 
 // sub components for /pages/notice
+import CreateNotice from 'sub-components/notice/CreateNotice';
 import NoticeTable from 'sub-components/notice/NoticeTable';
 import NoticeDetail from 'sub-components/notice/NoticeDetail';
 
 // sub components for /pages/qna
+import CreateQna from 'sub-components/qna/CreateQna';
 import QnaTable from 'sub-components/qna/QnaTable';
 import QnaDetail from 'sub-components/qna/QnaDetail';
 
@@ -71,9 +73,11 @@ export {
    Teams,   
    StockCard,
 
+   CreateNotice,
    NoticeTable,
    NoticeDetail,
 
+   CreateQna,
    QnaTable,
    QnaDetail,
    
