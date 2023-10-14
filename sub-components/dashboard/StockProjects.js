@@ -13,7 +13,7 @@ import { getStocks } from 'app/api/Stock';
 import { useEffect } from 'react';
 import { SET_STOCKS } from 'redux/stockSlice';
 
-const dataList = ProjectsData.map((data) => (<StockCard id={data.id} projectName={data.projectName} location={data.location}/>))
+
 
 const StockProjects = () => {
     // 선택한 테이블 값을 state로 정의
@@ -24,18 +24,28 @@ const StockProjects = () => {
     useEffect(() => {
         async function getAndSetStocks() { 
             const result = await getStocks();
-            console.log(result.json.data);
+            console.log(result.json.data.dataList);
+            if (Array.isArray(result.json.data.dataList)) {
+                console.log("if문 안으로 들어옴");
+                setshowDataList(result.json.data.dataList);
+              }
 
             // 리덕스를 이용해서 state에 값 설정
-            dispatch(SET_STOCKS(result.json.data));
+            dispatch(SET_STOCKS(result.json.data.dataList));
         }
-        getAndSetStocks();
-    });
+
+        // 조건을 걸어 한 번만 실행되도록
+        if (showDataList.length === 0) {
+            getAndSetStocks();
+        }
+    }, [showDataList]); // 의존성 배열 설정
+
+    const dataList = showDataList.map((x) => (<StockCard id={x.id} company={x.company} location={x.location}/>))
+
     return (
         <Row className="mt-6">
             <Col md={1} xs={1}>
                 {dataList}
-                {/* {ProjectsData[0].location} */}
             </Col>
         </Row>
 
@@ -43,3 +53,4 @@ const StockProjects = () => {
     }
 
 export default StockProjects;
+

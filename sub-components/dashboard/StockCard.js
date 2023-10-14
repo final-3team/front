@@ -16,7 +16,7 @@ const StockCard = (props) => {
                             <Card.Text>                                
                                 <tbody>
                                         <tr>
-                                            <td className="align-middle">{props.id +'-' + props.projectName}</td>
+                                            <td className="align-middle">{props.id +'-' + props.company}</td>
                                         </tr>
                                 </tbody>
                             </Card.Text>
