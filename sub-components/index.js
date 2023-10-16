@@ -49,7 +49,7 @@ import { Fragment } from 'react';
 
 
 // sub components for /pages/contract
-import Current from './contract/current';
+
 
 // sub components for /pages/current/storingcurrent
 import Button from './current/storing/Button';
@@ -66,7 +66,8 @@ import Items from './estimate/items/items';
 import List from './estimate/list/list';
 import { makePdf } from './estimate/contractPDF/make_pdf';
 import { ContentsPdf } from './estimate/contractPDF/contents_pdf';
-
+import Current from './contract/current';
+import Storing from './storing/current';
 export {
    ActiveProjects,
    TasksPerformance,
@@ -102,8 +103,6 @@ export {
    BSOffCanvas,   
    
 
-  
-   Current,
    Button,
    Ex,
 
@@ -117,7 +116,9 @@ export {
    Items,
    List,
    makePdf,
-   ContentsPdf
+   ContentsPdf,
+   Current,
+   Storing
 
 
 

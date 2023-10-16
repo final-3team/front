@@ -1,3 +1,38 @@
+// import React, { useState } from "react";
+// import "./basic";
+// import "./New.css";
+// import Basic from "./basic";
+
+// const New = (props) => {
+//   const [isEdit, setIsEdit] = useState(false);
+
+//   const SaveDataHandler = (enteredestimateData) => {
+//     const estimateData = {
+//       ...enteredestimateData,
+//       id: Math.random().toString(),
+//     };
+//     props.OnAddList(estimateData);
+//     setIsEdit(false);
+//   };
+
+//   const startEditHandler = () => {
+//     setIsEdit(true);
+//   };
+//   const stopEditHandler = () => {
+//     setIsEdit(false);
+//   };
+
+//   return (
+//     <div className="new-expense">
+//       {!isEdit && <button onClick={startEditHandler}>견적서 작성</button>}
+//       {isEdit && (
+//         <Basic onSaveData={SaveDataHandler} onCancel={stopEditHandler} />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default New;
 import React, {useState} from "react";
 import './basic';
 import './New.css'
@@ -7,11 +42,11 @@ const New = (props) => {
     const [isEdit, setIsEdit] = useState(false);
 
     const SaveDataHandler = (enteredestimateData) => {
-        const estimateData = {
+        const products = {
             ...enteredestimateData,
             id: Math.random().toString()
         };
-        props.OnAddList(estimateData);
+        props.OnAddList(products);
         setIsEdit(false);
     };
 
@@ -24,7 +59,7 @@ const New = (props) => {
 
     return <div className="new-expense">
         {!isEdit && <button onClick={startEditHandler}>견적서 작성</button>}
-        {isEdit && <Basic onSaveData={SaveDataHandler} onCancel={stopEditHandler}/>}
+        {isEdit && <Basic onAddProducts={SaveDataHandler} onCancel={stopEditHandler}/>}
     </div>
 
 };
