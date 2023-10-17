@@ -6,7 +6,7 @@ const stockSlice = createSlice({
         stocks: null
     },
     reducers: {
-        SET_NOTICES: (state, action) => {
+        SET_STOCKS: (state, action) => {
             state.stocks = action.payload;
         },
     }
