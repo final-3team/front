@@ -37,7 +37,7 @@ export const getNotices = async (page, size) => {
         }
     };
     const data = await getPromise(`http://localhost:8080/api/v2/community/postList?page=${page}&size=${size}`, option, ).catch(() => {
-    // const data = await getPromise('http://222.98.255.30:23233/api/v2/community/postList?page=0&size=20', option, ).catch(() => {
+    // const data = await getPromise(`http://222.98.255.30:23233/api/v2/community/postList?page=${page}&size=${size}`, option, ).catch(() => {
         return statusError;
     });
 
@@ -58,7 +58,7 @@ export const getNotices = async (page, size) => {
 };
 
 // 백으로 공지 요청
-export const getNotice = async () => {
+export const getNotice = async (postSeq) => {
     const option = {
         method: 'GET',
         headers: {
@@ -67,7 +67,38 @@ export const getNotice = async () => {
         }
     };
 
-    const data = await getPromise('http://localhost:8080/api/v2/community/post?postSeq=2', option, ).catch(() => {
+    const data = await getPromise(`http://localhost:8080/api/v2/community/post?postSeq=${postSeq}`, option, ).catch(() => {
+        return statusError;
+    });
+
+    if (parseInt(Number(data.status)/100)===2) {
+        const status = data.ok;
+        const code = data.status;
+        const text = await data.text();
+        const json = text.length ? JSON.parse(text) : "";
+
+        return {
+            status,
+            code,
+            json
+        };
+    } else {
+        return statusError;
+    }
+};
+
+// 백으로 공지 입력
+export const createNotice = async (credentials) => {
+    const option = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            'Authorization': sessionStorage.getItem("accessToken")
+        },
+        body: JSON.stringify(credentials)
+    };
+    // http://222.98.255.30:23233
+    const data = await getPromise('http://localhost:8080/api/v2/community/post', option, ).catch(() => {
         return statusError;
     });
 

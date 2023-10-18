@@ -15,8 +15,10 @@ const NoticeTable = () => {
     const [selectedNotice, setSelectedNotice] = useState(null);
     const [selectedComponent, setSelectedComponent] = useState(null); // 추가: 선택한 컴포넌트를 관리하는 상태
     const [showDataList, setshowDataList] = useState([]);
-    const [currentPage, setCurrentPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(5); // 페이지 크기를 설정합니다.
+    const [totalElements, setTotalElements] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
 
     // 선택한 테이블 값을 변경하는 함수
     const handleTableSelection = (notice) => {
@@ -34,11 +36,16 @@ const NoticeTable = () => {
     useEffect(() => {
         async function getAndSetNotices() { 
             const result = await getNotices(currentPage, pageSize); // 페이지 및 페이지 크기를 요청에 추가
-            console.log(result.json.data.posts);
-            if (Array.isArray(result.json.data.posts)) {
+            console.log(result.json.data);
+            console.log("페이지" + currentPage + "토탈" + result.json.data.totalPages);
+            if (Array.isArray(result.json.data.content)) {
                 console.log("if문 안으로 들어옴");
-                setshowDataList(result.json.data.posts);
+                setshowDataList(result.json.data.content);
               }
+
+            // 페이징 처리를 위해 필요한 값들을 state에 설정
+            setTotalElements(result.json.data.totalElements);
+            setTotalPages(result.json.data.totalPages);
 
             // 리덕스를 이용해서 state에 값 설정
             dispatch(SET_NOTICES(result.json.data));
@@ -84,7 +91,7 @@ const NoticeTable = () => {
                         >
                             Previous
                         </Pagination.Prev>
-                        {Array.from({ length: Math.ceil(showDataList.length / pageSize) }).map((_, index) => (
+                        {Array.from({ length: Math.ceil(totalElements / pageSize) }).map((_, index) => (
                             <Pagination.Item
                                 key={index}
                                 active={currentPage === index + 1}
@@ -94,7 +101,7 @@ const NoticeTable = () => {
                             </Pagination.Item>
                         ))}
                         <Pagination.Next
-                            disabled={currentPage === Math.ceil(showDataList.length / pageSize)}
+                            disabled={currentPage === Math.ceil(totalElements / pageSize)}
                             onClick={() => handlePageChange(currentPage + 1)}
                         >
                             Next
