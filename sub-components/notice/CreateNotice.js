@@ -1,15 +1,17 @@
+
 // import node module libraries
-import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
+
+import { useRouter } from "next/navigation";
+
 import { Col, Row, Card, Table, Form, Tab, Container, Button } from 'react-bootstrap';
 
 // import hooks
 import useMounted from 'hooks/useMounted';
 
-import { useDispatch } from 'react-redux';
-import { useForm } from 'react-hook-form';
-import { createNotice } from 'app/api/Notice';
-import { useRouter } from "next/navigation";
-import { SET_TOKEN } from 'sub-components/auth/token/accessToken';
+// import api
+import { postCreateNotice } from 'app/api/Notice';
 
 const CreateNotice = () => {
     const hasMounted = useMounted();
@@ -25,21 +27,10 @@ const CreateNotice = () => {
     } = useForm({ mode: 'onChange' });
 
     const onSubmit = async data => {
-        const response = await createNotice({ title: data.title, body: data.body, category: "공지사항" });
-        
-    
+        const response = await postCreateNotice({ title: data.title, body: data.body, category: data.category });//data.title, data.body, data.category
         const result = response.json;
-    
-        if (result.code === 'OK') {
-          dispatch(SET_TOKEN(result.data.accessToken));
-          console.log(result.data.accessToken);
-          typeof window !== 'undefined' ? sessionStorage.setItem("accessToken", result.data.accessToken) : null;
-          
-          router.push("/");
-          
-        } 
       };
-      const onError = errors => console.log(errors);
+    const onError = errors => console.log(errors + "에러");
     
     const textareaStyle = {
       height: '400px', // 원하는 높이로 지정하세요.
@@ -61,7 +52,10 @@ const CreateNotice = () => {
                                     <Form.Control 
                                     name="title"
                                     placeholder="제목을 입력하세요" 
-                                    required=""
+                                    required="" 
+                                    {...register('title', {
+                                      required: true,
+                                    })}
                                     />
                                     </Form.Group>
                                 </th>
@@ -79,8 +73,21 @@ const CreateNotice = () => {
                                     name="body"
                                     placeholder="내용을 입력하세요"
                                     style={{ height: '400px' }}
+                                    required="" 
+                                    {...register('body', {
+                                      required: true,
+                                    })}
                                     />
-                                    </Form.Group>
+                                    </Form.Group>                                    
+                                    <Form.Control
+                                    type="hidden"
+                                    name="category"
+                                    value="ANNOUNCEMENT"
+                                    required="" 
+                                    {...register('category', {
+                                        required: true,
+                                    })}
+                                    />
                                     </div>
                                 </td>
                             </tr>
