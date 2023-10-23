@@ -63,12 +63,32 @@
 
 // export default Current;
 
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Table } from "react-bootstrap";
 import Items from "sub-components/estimate/items/items";
 import "./current.css";
+import { getEstimates } from "app/api/Estimate";
+import { useDispatch } from "react-redux";
+import { SET_ESTIMATES } from "redux/estimateSlice";
 
-const Current = (props) => {
+const Current = () => {
+
+  const [showDataList, setshowDataList] = useState([]);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function getAndSetEstimates() { 
+        const result = await getEstimates();
+        console.log(result.json.data.contents);
+        setshowDataList(result.json.data.contents);
+
+        // 리덕스를 이용해서 state에 값 설정
+        dispatch(SET_ESTIMATES(result.json.data.contents));
+    }
+    getAndSetEstimates();
+}, []);
+
   return (
     <div>
       <Table responsive className="text-nowrap mb-0">
@@ -86,7 +106,7 @@ const Current = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.products.map((product, index) => {
+          {showDataList.map((product, index) => {
             <Items
               key={product.id}
               company={product.company}

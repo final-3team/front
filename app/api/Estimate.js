@@ -36,8 +36,8 @@ export const postEstimateOne = async (page) => {
             'Authorization': sessionStorage.getItem("accessToken")
         }
     };
-    const data = await getPromise(`http://localhost:8080/api/v2/contract/contract-termination`, option, ).catch(() => {
-    // const data = await getPromise(`http://localhost:8080/api/v2/contract/contract-termination`, option, ).catch(() => {
+    const data = await getPromise(`http://localhost:8080/api/v2/contract/estimate-contract`, option, ).catch(() => {
+    // const data = await getPromise(`http://localhost:8080/api/v2/contract/estimate-contract`, option, ).catch(() => {
         return statusError;
     });
 
@@ -66,8 +66,8 @@ export const getEstimates = async (page) => {
             'Authorization': sessionStorage.getItem("accessToken")
         }
     };
-    const data = await getPromise(`http://localhost:8080/api/v2/contract/estimate-contracts`, option, ).catch(() => {
-    // const data = await getPromise(`http://localhost:8080/api/v2/contract/estimate-contracts`, option, ).catch(() => {
+    const data = await getPromise(`http://localhost:8080/api/v2/contract/contract-termination`, option, ).catch(() => {
+    // const data = await getPromise(`http://localhost:8080/api/v2/contract/contract-termination`, option, ).catch(() => {
         return statusError;
     });
 

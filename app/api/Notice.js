@@ -68,6 +68,7 @@ export const getNotice = async (postSeq) => {
     };
 
     const data = await getPromise(`http://localhost:8080/api/v2/community/post?postSeq=${postSeq}`, option, ).catch(() => {
+    // const data = await getPromise(`http://222.98.255.30:23233/api/v2/community/post?postSeq=${postSeq}`, option, ).catch(() => {
         return statusError;
     });
 
@@ -88,7 +89,8 @@ export const getNotice = async (postSeq) => {
 };
 
 // 백으로 공지 입력
-export const createNotice = async (credentials) => {
+export const postCreateNotice = async (credentials) => {
+    console.log(credentials);
     const option = {
         method: 'POST',
         headers: {
@@ -97,8 +99,8 @@ export const createNotice = async (credentials) => {
         },
         body: JSON.stringify(credentials)
     };
-    // http://222.98.255.30:23233
     const data = await getPromise('http://localhost:8080/api/v2/community/post', option, ).catch(() => {
+    // const data = await getPromise(`http://222.98.255.30:23233/api/v2/community/post`, option, ).catch(() => {
         return statusError;
     });
 

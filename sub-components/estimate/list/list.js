@@ -115,13 +115,39 @@ import React, { useState } from "react";
 import { Table } from "react-bootstrap";
 import Items from "../items/items";
 import { Modal } from "react-bootstrap";
+import { useEffect } from 'react';
 import './list.css';
+import { getEstimates } from "app/api/Estimate";
+import { getContractStatus } from "app/api/Store";
+import { SET_ESTIMATES } from "redux/estimateSlice";
+import { SET_STATUS } from "redux/storeSlice";
+import { useDispatch } from "react-redux";
 
-const List = (props) => {
+
+
+const List = () => {
     const [show, setShow] = useState(false);
+    const [showDataList, setshowDataList] = useState([]);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        async function getAndSetEstimates() { 
+            const result = await getEstimates();
+            console.log(result.json.data);
+            if (Array.isArray(result.json.data)) {
+                console.log("if문 안으로 들어옴");
+                setshowDataList(result.json.data);
+              }
+    
+            // 리덕스를 이용해서 state에 값 설정
+            dispatch(SET_ESTIMATES(result.json.data));
+        }
+        getAndSetEstimates();
+    }, []); // currentPage 및 pageSize가 변경될 때마다 실행
 
     return (
         <div>
@@ -139,7 +165,7 @@ const List = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.products.map((product, index) => {
+                    {showDataList.map((product, index) => {
                         <Items
                             key={product.id}
                             company={product.company}
@@ -175,7 +201,7 @@ const List = (props) => {
                         <Modal.Title>견적사항</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    {props.products.map((product, index) => {
+                    {showDataList.map((product, index) => {
                         <Items
                         key={product.id}
                         company={product.company}
@@ -221,4 +247,3 @@ const List = (props) => {
 };
 
 export default List;
-

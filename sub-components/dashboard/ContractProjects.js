@@ -1,11 +1,29 @@
 // import node module libraries
 import Link from 'next/link';
+import React, { useState, useEffect, useCallback } from "react";
 import { ProgressBar, Col, Row, Card, Table, Image } from 'react-bootstrap';
 
-// import required data files
-import ProjectsData from "data/dashboard/ProjectsData";
+import { getEstimates } from "app/api/Estimate";
+import { useDispatch } from "react-redux";
+import { SET_ESTIMATES } from "redux/estimateSlice";
 
 const ContractProjects = () => {
+
+    const [showDataList, setshowDataList] = useState([]);
+  
+    const dispatch = useDispatch();
+  
+    useEffect(() => {
+      async function getAndSetEstimates() { 
+          const result = await getEstimates();
+          console.log(result.json.data.contents);
+          setshowDataList(result.json.data.contents);
+  
+          // 리덕스를 이용해서 state에 값 설정
+          dispatch(SET_ESTIMATES(result.json.data.contents));
+      }
+      getAndSetEstimates();
+  }, []);
     return (
         <Row className="mt-6">
             <Col md={12} xs={12}>
@@ -28,7 +46,7 @@ const ContractProjects = () => {
                            </tr>
                         </thead>
                         <tbody>
-                            {ProjectsData.map((item, index) => {
+                            {showDataList.map((item, index) => {
                                 return (
                                     <tr key={index}>
                                         <td className="align-middle">{item.number}</td>

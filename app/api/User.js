@@ -36,8 +36,8 @@ export const loginUser = async (credentials) => {
         },
         body: JSON.stringify(credentials)
     };
-
-    const data = await getPromise('http://222.98.255.30:23233/api/v2/auth/sign-in', option, ).catch(() => {
+    const data = await getPromise('http://localhost:8080/api/v2/auth/sign-in', option, ).catch(() => {
+    // const data = await getPromise('http://222.98.255.30:23233/api/v2/auth/sign-in', option, ).catch(() => {
         return statusError;
     });
 
@@ -69,7 +69,8 @@ export const signupUser = async (credentials) => {
         body: JSON.stringify(credentials)
     };
 
-    const data = await getPromise('http://222.98.255.30:23233/api/v2/auth/sign-up', option, ).catch(() => {
+    const data = await getPromise('http://localhost:8080/api/v2/auth/sign-up', option, ).catch(() => {
+    // const data = await getPromise('http://222.98.255.30:23233/api/v2/auth/sign-up', option, ).catch(() => {
         return statusError;
     });
 

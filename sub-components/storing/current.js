@@ -1,7 +1,30 @@
 import { Row, Col, Card, Table } from "react-bootstrap";
-import ProjectsData from "data/dashboard/ProjectsData";
+import { getStoreStatus } from "app/api/Store";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { SET_STORES } from "redux/storeSlice";
 
 const Storing = () => {
+
+  const [showDataList, setshowDataList] = useState([]);
+    
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+      async function getAndSetStoreStatus() {           
+          const result = await getStoreStatus();
+          console.log(result.json.data);
+          if (Array.isArray(result.json.data)) {
+              console.log("if문 안으로 들어옴");
+              setshowDataList(result.json.data);
+            }
+
+          // 리덕스를 이용해서 state에 값 설정
+          dispatch(SET_STORES(result.json.data));
+      }        
+      getAndSetStoreStatus();
+  }, []); // currentPage 및 pageSize가 변경될 때마다 실행
+
   const formstyle = {
     width: "100px",
     margin: "auto",
@@ -12,6 +35,7 @@ const Storing = () => {
     margin: "auto",
     display: "block",
   };
+  
   return (
     <Row className="mt-6">
       <Col xl={12} lg={12} md={12} xs={12} className="mb-6">
@@ -40,7 +64,7 @@ const Storing = () => {
               </tr>
             </thead>
             <tbody>
-              {ProjectsData.map((item, index) => {
+              {showDataList.map((item, index) => {
                 return (
                   <tr key={index}>
                     <td className="align-middle">{item.company}</td>

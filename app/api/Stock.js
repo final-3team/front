@@ -36,8 +36,8 @@ export const getStocks = async () => {
             'Authorization': sessionStorage.getItem("accessToken")
         }
     };
-    // const data = await getPromise(`http://localhost:8080//api/v2/warehouse/test/inventoryStatus`, option, ).catch(() => {
-    const data = await getPromise('http://222.98.255.30:23233/api/v2/warehouse/test/inventoryStatus?warehouse=1', option, ).catch(() => {
+    const data = await getPromise(`http://localhost:8080//api/v2/warehouse/test/inventoryStatus?warehouse=1`, option, ).catch(() => {
+    // const data = await getPromise('http://222.98.255.30:23233/api/v2/warehouse/test/inventoryStatus?warehouse=1', option, ).catch(() => {
         return statusError;
     });
 

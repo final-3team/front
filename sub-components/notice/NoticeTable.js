@@ -15,7 +15,7 @@ const NoticeTable = () => {
     const [selectedNotice, setSelectedNotice] = useState(null);
     const [selectedComponent, setSelectedComponent] = useState(null); // 추가: 선택한 컴포넌트를 관리하는 상태
     const [showDataList, setshowDataList] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(0);
     const [pageSize, setPageSize] = useState(5); // 페이지 크기를 설정합니다.
     const [totalElements, setTotalElements] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
@@ -37,7 +37,7 @@ const NoticeTable = () => {
         async function getAndSetNotices() { 
             const result = await getNotices(currentPage, pageSize); // 페이지 및 페이지 크기를 요청에 추가
             console.log(result.json.data);
-            console.log("페이지" + currentPage + "토탈" + result.json.data.totalPages);
+            console.log("페이지" + currentPage);
             if (Array.isArray(result.json.data.content)) {
                 console.log("if문 안으로 들어옴");
                 setshowDataList(result.json.data.content);
@@ -86,7 +86,7 @@ const NoticeTable = () => {
                     {/* Pagination 컴포넌트를 추가하여 페이지를 변경할 수 있도록 합니다. */}
                     <Pagination className="justify-content-center">
                         <Pagination.Prev
-                            disabled={currentPage === 1}
+                            disabled={currentPage === 0}
                             onClick={() => handlePageChange(currentPage - 1)}
                         >
                             Previous
@@ -94,14 +94,14 @@ const NoticeTable = () => {
                         {Array.from({ length: Math.ceil(totalElements / pageSize) }).map((_, index) => (
                             <Pagination.Item
                                 key={index}
-                                active={currentPage === index + 1}
+                                active={currentPage === index}
                                 onClick={() => handlePageChange(index + 1)}
                             >
                                 {index + 1}
                             </Pagination.Item>
                         ))}
                         <Pagination.Next
-                            disabled={currentPage === Math.ceil(totalElements / pageSize)}
+                            disabled={currentPage === Math.ceil(totalElements / pageSize)-1}
                             onClick={() => handlePageChange(currentPage + 1)}
                         >
                             Next

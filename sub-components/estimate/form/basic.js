@@ -141,6 +141,24 @@ import React, { useState, useRef } from "react";
 import "./Basic.css";
 
 function AddProducts(props) {
+  const hasMounted = useMounted();
+
+  const router = useRouter();
+  
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isSubmitting, isDirty, isValid },
+  } = useForm({ mode: 'onChange' });
+
+  const onSubmit = async data => {
+      const response = await postEstimateOne({ title: data.title, body: data.body, category: data.category });//data.title, data.body, data.category
+      const result = response.json;
+    };
+  const onError = errors => console.log(errors + "에러");
+
   const companyRef = useRef("");
   const phoneRef = useRef("");
   const productNameRef = useRef("");
