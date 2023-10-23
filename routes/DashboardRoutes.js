@@ -37,18 +37,6 @@ export const DashboardMenu = [
 	},
 	{
 		id: uuid(),
-		title: 'Pages',
-		icon: 'layers',
-		children: [
-			{ id: uuid(), link: '/pages/profile', name: 'Profile' },
-			{ id: uuid(), link: '/pages/settings', name: 'Settings'},
-			{ id: uuid(), link: '/pages/billing', name: 'Billing' },
-			{ id: uuid(), link: '/pages/pricing', name: 'Pricing'},
-			{ id: uuid(), link: '/not-found', name: '404 Error' }
-		]
-	},	
-	{
-		id: uuid(),
 		title: '회원관리',
 		icon: 'lock',
 		children: [
@@ -60,14 +48,88 @@ export const DashboardMenu = [
 	},
 	{
 		id: uuid(),
-		title: 'Layouts',
-		icon: 'layout',
-		link: '/layout-vertical'
+		title: '입고 출고',
+		grouptitle: true
 	},	
 	{
 		id: uuid(),
-		title: 'UI COMPONENTS',
+		title: '견적 및 계약서 작성',
+		icon: 'git-pull-request',
+		link: '/store-release/estimate-contract'
+	},
+	{
+		id: uuid(),
+		title: '요청',
+		icon: 'corner-left-down',
+		children: [
+			{
+				id: uuid(),
+				name: '입고 요청',
+				link: '/store-release/request'
+			},
+			{ 
+				id: uuid(),
+				name: '출고 요청',
+				link: ''
+			}
+		]
+	},
+	{
+		id: uuid(),
+		title: '현황',
+		icon: 'corner-left-down',
+		children: [
+			{
+				id: uuid(),
+				name: '견적 및 계약 현황',
+				link: '/store-release/status/contract'
+			},
+			{
+				id: uuid(),
+				name: '입출고 현황',
+				link: '/store-release/status/storing'
+			}
+		]
+	},	
+	{
+		id: uuid(),
+		title: '창고관리',
 		grouptitle: true
+	},	
+	{
+		id: uuid(),
+		title: '기자재관리',
+		icon: 'git-pull-request',
+		link: '/equipment-management'
+	},
+	{
+		id: uuid(),
+		title: '공지사항',
+		icon: 'git-pull-request',
+		link: '/notice'
+	},
+	{
+		id: uuid(),
+		title: '문의사항',
+		icon: 'git-pull-request',
+		link: '/qna'
+	},
+	{
+		id: uuid(),
+		title: '임시메뉴',
+		grouptitle: true
+	},	
+	{
+		id: uuid(),
+		title: 'create',
+		icon: 'monitor',
+		children: [
+			{ id: uuid(), link: '/create/contract', name: 'contract' },
+			{ id: uuid(), link: '/create/release', name: 'release' },
+			{ id: uuid(), link: '/create/release_request', name: 'release_request' },
+			{ id: uuid(), link: '/create/staffmain', name: 'staffmain' },
+			{ id: uuid(), link: '/create/stock', name: 'stock' }
+		]
 	},	
 	{
 		id: uuid(),
@@ -102,56 +164,16 @@ export const DashboardMenu = [
 	},	
 	{
 		id: uuid(),
-		title: '입고 및 계약',
-		icon: 'corner-left-down',
+		title: 'pages',
+		icon: 'monitor',
 		children: [
-			{ 
-				id: uuid(), 
-				title: '현황',
-				children: [
-					{ id: uuid(), link: '/pages/current/contract', name: '계약현황'},
-					{ id: uuid(), link: '/pages/current/storing', name: '입고현황'}
-				]
-			},
-			{ 
-				id: uuid(), 
-				title: '견적서 작성',
-				children: [
-					{id: uuid(), link:'/pages/estimate', name: '작성하기'}
-				]
-				
-			}
+			{ id: uuid(), link: '/pages/billing', name: 'billing' },
+			{ id: uuid(), link: '/pages/contract', name: 'contract' },
+			{ id: uuid(), link: '/pages/pricing', name: 'pricing' },
+			{ id: uuid(), link: '/pages/profile', name: 'profile' },
+			{ id: uuid(), link: '/pages/settings', name: 'settings' }
 		]
 	},	
-	{
-		id: uuid(),
-		title: '창고관리',
-		grouptitle: true
-	},	
-	{
-		id: uuid(),
-		title: '기자재관리',
-		icon: 'git-pull-request',
-		link: '/equipment-management'
-	},
-	{
-		id: uuid(),
-		title: '공지사항',
-		icon: 'git-pull-request',
-		link: '/notice'
-	},
-	{
-		id: uuid(),
-		title: '문의사항',
-		icon: 'git-pull-request',
-		link: '/qna'
-	},
-	{
-		id: uuid(),
-		title: 'Download',
-		icon: 'download',
-		link: 'https://codescandy.gumroad.com/l/dashui-nextjs'
-	}
 ];
 
 export default DashboardMenu;
