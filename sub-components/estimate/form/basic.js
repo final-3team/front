@@ -140,6 +140,19 @@
 import React, { useState, useRef } from "react";
 import "./Basic.css";
 
+// import node module libraries
+import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
+
+import { useRouter } from "next/navigation";
+import { Col, Row, Card, Table, Form, Tab, Container, Button } from 'react-bootstrap';
+
+// import hooks
+import useMounted from 'hooks/useMounted';
+
+// import api
+import { postEstimateOne } from "app/api/Estimate";
+
 function AddProducts(props) {
   const hasMounted = useMounted();
 
@@ -154,7 +167,7 @@ function AddProducts(props) {
   } = useForm({ mode: 'onChange' });
 
   const onSubmit = async data => {
-      const response = await postEstimateOne({ title: data.title, body: data.body, category: data.category });//data.title, data.body, data.category
+      const response = await postEstimateOne({ deposit: data.deposit, productQuantity: data.productQuantity, storeType: data.storeType, warehouseArea: data.warehouseArea });//data.title, data.body, data.category
       const result = response.json;
     };
   const onError = errors => console.log(errors + "에러");
@@ -188,50 +201,141 @@ function AddProducts(props) {
   }
 
   return (
-    <form onSubmit={submitHandler}>
-      <div className="new-expense__controls">
-        <label htmlFor="company">회사명</label>
-        <input type="text" id="company" ref={companyRef} />
-        <div className="new-expense__controls">
-          <label htmlFor="phone">연락처</label>
-          <input type="text" id="phone" ref={phoneRef} />
-        </div>
-      </div>
-      <div className="new-expense__controls">
-        <label htmlFor="productName">상품명</label>
-        <input type="text" id="productName" ref={productNameRef} />
-        <div className="new-expense__controls">
-          <label htmlFor="storing_quantity">상품수량</label>
-          <input
-            type="number"
-            id="storing_quantity"
-            ref={storing_quantityRef}
-          />
-        </div>
-        <div className="new-expense__controls">
-          <label htmlFor="classification">상품분류</label>
-          <input type="text" id="classification" ref={classificationRef} />
-        </div>
-        <div className="new-expense__controls">
-          <label htmlFor="location">보관위치</label>
-          <input type="text" id="location" ref={locationRef} />
-        </div>
-        <div className="new-expense__controls">
-          <label htmlFor="pallet_quantity">Pallet.수량</label>
-          <input type="number" id="pallet_quantity" ref={pallet_quantityRef} />
-        </div>
-        <div className="new-expense__controls">
-          <label htmlFor="pallet_size">Pallet.규격</label>
-          <input type="number" id="pallet_size" ref={pallet_sizeRef} />
-        </div>
-        <div className="new-expense__actions">
-          <button type="button" onClick={props.onCancel}>
-            취소
-          </button>
-          <button type="submit">작성</button>
-        </div>
-      </div>
-    </form>
+    <Col>
+        <Card>
+            <Card.Body>
+                {hasMounted &&
+                <Form onSubmit={handleSubmit(onSubmit, onError)}>
+
+                <Table className="text-nowrap">
+                    <tr>
+                        <th scope="col" className='textCenter'>계약금</th>
+                        <th scope="col">
+                            <Form.Group className="mb-3" controlId="deposit">
+                            <Form.Control 
+                            name="deposit"
+                            placeholder="계약금을 입력하세요" 
+                            required="" 
+                            {...register('deposit', {
+                              required: true,
+                            })}
+                            />
+                            </Form.Group>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th scope="col" className='textCenter'>삼품수량</th>
+                        <th scope="col">
+                            <Form.Group className="mb-3" controlId="productQuantity">
+                            <Form.Control 
+                            name="productQuantity"
+                            placeholder="삼품수량을 입력하세요" 
+                            required="" 
+                            {...register('productQuantity', {
+                              required: true,
+                            })}
+                            />
+                            </Form.Group>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th scope="col" className='textCenter'>상품특성</th>
+                        <th scope="col">
+                            {/* Username */}
+                            <Form.Group className="mb-3" controlId="storeType">
+                            <Form.Control 
+                            name="storeType"
+                            placeholder="상품특성을 입력하세요" 
+                            required="" 
+                            {...register('storeType', {
+                              required: true,
+                            })}
+                            />
+                            </Form.Group>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th scope="col" className='textCenter'>입고지역</th>
+                        <th scope="col">
+                            {/* Username */}
+                            <Form.Group className="mb-3" controlId="warehouseArea">
+                            <Form.Control 
+                            name="warehouseArea"
+                            placeholder="입고지역을 입력하세요" 
+                            required="" 
+                            {...register('warehouseArea', {
+                              required: true,
+                            })}
+                            />
+                            </Form.Group>
+                        </th>
+                    </tr>
+                    {/* <tr>
+                        <th scope="row" className='textCenter'>작성자</th>
+                        <td><input class="form-control"></input></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" className='textCenter'>작성일</th>
+                        <td><input class="form-control"></input></td>
+                    </tr> */}
+                </Table>
+                <div>
+                    <div className="new-expense__actions">
+                        <button type="button" onClick={props.onCancel}>
+                            취소
+                        </button>
+                        <button type="submit">작성</button>
+                    </div>
+                    </div>
+                
+                </Form>}
+            </Card.Body>
+        </Card>
+    </Col>
+    // <form onSubmit={submitHandler}>
+    //   <div className="new-expense__controls">
+    //     <label htmlFor="company">회사명</label>
+    //     <input type="text" id="company" ref={companyRef} />
+    //     <div className="new-expense__controls">
+    //       <label htmlFor="phone">연락처</label>
+    //       <input type="text" id="phone" ref={phoneRef} />
+    //     </div>
+    //   </div>
+    //   <div className="new-expense__controls">
+    //     <label htmlFor="productName">상품명</label>
+    //     <input type="text" id="productName" ref={productNameRef} />
+    //     <div className="new-expense__controls">
+    //       <label htmlFor="storing_quantity">상품수량</label>
+    //       <input
+    //         type="number"
+    //         id="storing_quantity"
+    //         ref={storing_quantityRef}
+    //       />
+    //     </div>
+    //     <div className="new-expense__controls">
+    //       <label htmlFor="classification">상품분류</label>
+    //       <input type="text" id="classification" ref={classificationRef} />
+    //     </div>
+    //     <div className="new-expense__controls">
+    //       <label htmlFor="location">보관위치</label>
+    //       <input type="text" id="location" ref={locationRef} />
+    //     </div>
+    //     <div className="new-expense__controls">
+    //       <label htmlFor="pallet_quantity">Pallet.수량</label>
+    //       <input type="number" id="pallet_quantity" ref={pallet_quantityRef} />
+    //     </div>
+    //     <div className="new-expense__controls">
+    //       <label htmlFor="pallet_size">Pallet.규격</label>
+    //       <input type="number" id="pallet_size" ref={pallet_sizeRef} />
+    //     </div>
+    //     <div className="new-expense__actions">
+    //       <button type="button" onClick={props.onCancel}>
+    //         취소
+    //       </button>
+    //       <button type="submit">작성</button>
+    //     </div>
+    //   </div>
+    // </form>
   );
 }
 
