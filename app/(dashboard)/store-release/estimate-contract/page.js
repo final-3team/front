@@ -108,13 +108,13 @@ function Estimate() {
       <section>
         <New OnAddList={addProductHandler} />
       </section>
-      <Container>
+      {/* <Container>
         <PageHeading heading="견적사항" />
         <section>
           <button onClick={fetchHandler}>새로고침</button>
         </section>
         <section>{content}</section>
-      </Container>
+      </Container> */}
     </React.Fragment>
   );
 }

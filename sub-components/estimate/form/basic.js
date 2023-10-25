@@ -167,7 +167,7 @@ function AddProducts(props) {
   } = useForm({ mode: 'onChange' });
 
   const onSubmit = async data => {
-      const response = await postEstimateOne({ deposit: data.deposit, productQuantity: data.productQuantity, storeType: data.storeType, warehouseArea: data.warehouseArea });//data.title, data.body, data.category
+      const response = await postEstimateOne({ deposit: data.deposit,  productName: data.productName, productQuantity: data.productQuantity, storeType: data.storeType, warehouseArea: data.warehouseArea });//data.title, data.body, data.category
       const result = response.json;
     };
   const onError = errors => console.log(errors + "에러");
@@ -180,6 +180,19 @@ function AddProducts(props) {
   const locationRef = useRef("");
   const pallet_quantityRef = useRef("");
   const pallet_sizeRef = useRef("");
+
+  const [calculatedDeposit, setCalculatedDeposit] = useState(0);
+
+  function productQuantityChangeHandler(event) {
+    const newQuantity = parseFloat(event.target.value);
+    console.log(event.target.value + "가져오나");
+    if (!isNaN(newQuantity)) {
+      const newDeposit = newQuantity * 100;
+      setCalculatedDeposit(newDeposit);
+    } else {
+      setCalculatedDeposit(0);
+    }
+  }
 
   function submitHandler(event) {
     event.preventDefault();
@@ -212,11 +225,28 @@ function AddProducts(props) {
                         <th scope="col" className='textCenter'>계약금</th>
                         <th scope="col">
                             <Form.Group className="mb-3" controlId="deposit">
-                            <Form.Control 
+                            <Form.Control
                             name="deposit"
                             placeholder="계약금을 입력하세요" 
-                            required="" 
-                            {...register('deposit', {
+                            // required=""
+                            // {...register('deposit', {
+                            //   required: true,
+                            // })}
+                            readOnly
+                            value={calculatedDeposit}
+                            />
+                            </Form.Group>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th scope="col" className='textCenter'>상품명</th>
+                        <th scope="col">
+                            <Form.Group className="mb-3" controlId="productName">
+                            <Form.Control
+                            name="productName"
+                            placeholder="삼품명을 입력하세요" 
+                            required=""
+                            {...register('productName', {
                               required: true,
                             })}
                             />
@@ -224,13 +254,14 @@ function AddProducts(props) {
                         </th>
                     </tr>
                     <tr>
-                        <th scope="col" className='textCenter'>삼품수량</th>
+                        <th scope="col" className='textCenter'>상품수량</th>
                         <th scope="col">
                             <Form.Group className="mb-3" controlId="productQuantity">
                             <Form.Control 
                             name="productQuantity"
                             placeholder="삼품수량을 입력하세요" 
                             required="" 
+                            onChange={productQuantityChangeHandler}
                             {...register('productQuantity', {
                               required: true,
                             })}
@@ -241,35 +272,47 @@ function AddProducts(props) {
                     <tr>
                         <th scope="col" className='textCenter'>상품특성</th>
                         <th scope="col">
-                            {/* Username */}
                             <Form.Group className="mb-3" controlId="storeType">
-                            <Form.Control 
+                            <Form.Control
+                            as="select"
                             name="storeType"
                             placeholder="상품특성을 입력하세요" 
                             required="" 
                             {...register('storeType', {
                               required: true,
                             })}
-                            />
+                            >
+                              <option value="">상품특성을 선택하세요</option>
+                              <option value="FROZEN_STORAGE">냉동</option>
+                              <option value="COLD_STORAGE">냉장</option>
+                              <option value="ROOM_STORAGE">실온</option>
+                            </Form.Control>
                             </Form.Group>
                         </th>
                     </tr>
                     <tr>
                         <th scope="col" className='textCenter'>입고지역</th>
                         <th scope="col">
-                            {/* Username */}
                             <Form.Group className="mb-3" controlId="warehouseArea">
                             <Form.Control 
+                            as="select"
                             name="warehouseArea"
                             placeholder="입고지역을 입력하세요" 
                             required="" 
                             {...register('warehouseArea', {
                               required: true,
                             })}
-                            />
+                            >
+                              <option value="">입고지역을 선택하세요</option>
+                              <option value="SEOUL_A">SEOUL_A</option>
+                              <option value="SEOUL_B">SEOUL_B</option>
+                              <option value="BUSAN_A">BUSAN_A</option>
+                              <option value="BUSAN_B">BUSAN_B</option>
+                            </Form.Control>
                             </Form.Group>
                         </th>
                     </tr>
+                    
                     {/* <tr>
                         <th scope="row" className='textCenter'>작성자</th>
                         <td><input class="form-control"></input></td>

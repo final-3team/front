@@ -28,13 +28,14 @@ const getPromise = async (url, option) => {
 };
 
 // 백으로 견적서 전송
-export const postEstimateOne = async (page) => {
+export const postEstimateOne = async (credentials) => {
     const option = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
             'Authorization': sessionStorage.getItem("accessToken")
-        }
+        },
+        body: JSON.stringify(credentials)
     };
     const data = await getPromise(`http://localhost:8080/api/v2/contract/estimate-contract`, option, ).catch(() => {
     // const data = await getPromise(`http://localhost:8080/api/v2/contract/estimate-contract`, option, ).catch(() => {
@@ -58,7 +59,7 @@ export const postEstimateOne = async (page) => {
 };
 
 // 백으로 견적서 요청
-export const getEstimates = async (page) => {
+export const getEstimates = async () => {
     const option = {
         method: 'GET',
         headers: {
@@ -66,7 +67,7 @@ export const getEstimates = async (page) => {
             'Authorization': sessionStorage.getItem("accessToken")
         }
     };
-    const data = await getPromise(`http://localhost:8080/api/v2/contract/contract-termination`, option, ).catch(() => {
+    const data = await getPromise(`http://localhost:8080/api/v2/contract/estimate-contracts`, option, ).catch(() => {
     // const data = await getPromise(`http://localhost:8080/api/v2/contract/contract-termination`, option, ).catch(() => {
         return statusError;
     });

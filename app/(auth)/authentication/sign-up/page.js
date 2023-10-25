@@ -6,12 +6,14 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { signupUser } from 'app/api/User';
 import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/navigation';
 
 // import hooks
 import useMounted from 'hooks/useMounted';
 
 const SignUp = () => {
   const hasMounted = useMounted();
+  const router = useRouter();
   const h1style ={
     fontSize: '40px',
     fontWeight: 'bold',
@@ -34,15 +36,13 @@ const SignUp = () => {
       phoneNumber: data.phoneNumber,
       userId: data.email,
       userName: data.userName,
-     });
-    
+     });    
 
     const result = response.json;
 
     if (result.code === 'OK') {
-      
-      router.push("/authentication/sign-in");
-      
+        console.log('회원가입 성공')
+        router.push("/authentication/sign-in");
     } 
   };
   const onError = errors => console.log(errors);
