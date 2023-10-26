@@ -40,18 +40,29 @@ const ContractProjects = () => {
                                 <th>창고</th>
                                 <th>상품분류</th>
                                 <th>계약일</th>
+                                <th>상태</th>
                            </tr>
                         </thead>
                         <tbody>
                             {showDataList.map((item, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td className="align-middle">{item.contractSeq}</td>
+                                        <td className="align-middle">{index+1}</td> {/* item.contractSeq */}
                                         <td className="align-middle">{item.productName}</td>
                                         <td className="align-middle">{item.productQuantity}</td>
                                         <td className="align-middle">{item.warehouseArea}</td>
-                                        <td className="align-middle">{item.storeType}</td>
-                                        <td className="align-middle">{item.storeDate}</td>
+                                        <td className="align-middle">
+                                            {item.storeType === "ROOM_STORAGE" ? "상온" :
+                                            item.storeType === "COLD_STORAGE" ? "냉장" :
+                                            item.storeType === "FROZEN_STORAGE" ? "냉동" : null}
+                                        </td>
+                                        <td className="align-middle">
+                                                {new Date(item.storeDate).toLocaleDateString('ko-KR')}
+                                        </td>                                        
+                                        <td className="align-middle">
+                                            {item.contractStatus === "BEFORE_CONTRACT" ? "진행중" :
+                                            item.contractStatus === "COMPLETE_CONTRACT" ? "입고" : null}
+                                        </td>
 
 
 
@@ -63,7 +74,7 @@ const ContractProjects = () => {
                         </tbody>
                     </Table>
                     <Card.Footer className="bg-white text-center">
-                        <Link href="#" className="link-primary">View All Projects</Link>
+                        <Link href="#" className="link-primary">Top</Link>
                     </Card.Footer>
                 </Card>
             </Col>

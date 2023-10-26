@@ -28,28 +28,28 @@ const QuickMenu = () => {
         query: '(min-width: 1224px)'
     })
 
-    const Notifications = () => {
-        return (
-            <SimpleBar style={{ maxHeight: '300px' }}>
-                <ListGroup variant="flush">
-                    {NotificationList.map(function (item, index) {
-                        return (
-                            <ListGroup.Item className={index === 0 ? 'bg-light' : ''} key={index}>
-                                <Row>
-                                    <Col>
-                                        <Link href="#" className="text-muted">
-                                            <h5 className=" mb-1">{item.sender}</h5>
-                                            <p className="mb-0"> {item.message}</p>
-                                        </Link>
-                                    </Col>
-                                </Row>
-                            </ListGroup.Item>
-                        );
-                    })}
-                </ListGroup>
-            </SimpleBar>
-        );
-    }
+    // const Notifications = () => {
+    //     return (
+    //         <SimpleBar style={{ maxHeight: '300px' }}>
+    //             <ListGroup variant="flush">
+    //                 {NotificationList.map(function (item, index) {
+    //                     return (
+    //                         <ListGroup.Item className={index === 0 ? 'bg-light' : ''} key={index}>
+    //                             <Row>
+    //                                 <Col>
+    //                                     <Link href="#" className="text-muted">
+    //                                         <h5 className=" mb-1">{item.sender}</h5>
+    //                                         <p className="mb-0"> {item.message}</p>
+    //                                     </Link>
+    //                                 </Col>
+    //                             </Row>
+    //                         </ListGroup.Item>
+    //                     );
+    //                 })}
+    //             </ListGroup>
+    //         </SimpleBar>
+    //     );
+    // }
 
     const QuickMenuDesktop = () => {
         return (
@@ -100,7 +100,7 @@ const QuickMenu = () => {
     const QuickMenuMobile = () => {
         return (
         <ListGroup as="ul" bsPrefix='navbar-nav' className="navbar-right-wrap ms-auto d-flex nav-top-wrap">
-            <Dropdown as="li" className="stopevent">
+            {/* <Dropdown as="li" className="stopevent">
                 <Dropdown.Toggle as="a"
                     bsPrefix=' '
                     id="dropdownNotification"
@@ -120,16 +120,16 @@ const QuickMenu = () => {
                                     <i className="fe fe-settings me-1"></i>
                                 </span>
                             </Link>
-                        </div>
-                        <Notifications />
-                        <div className="border-top px-3 pt-3 pb-3">
+                        </div> */}
+                        {/* <Notifications /> */}
+                        {/* <div className="border-top px-3 pt-3 pb-3">
                             <Link href="/dashboard/notification-history" className="text-link fw-semi-bold">
                                 See all Notifications
                             </Link>
                         </div>
                     </Dropdown.Item>
                 </Dropdown.Menu>
-            </Dropdown>
+            </Dropdown> */}
             <Dropdown as="li" className="ms-2">
                 <Dropdown.Toggle
                     as="a"

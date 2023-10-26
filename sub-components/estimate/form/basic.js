@@ -183,15 +183,14 @@ function AddProducts(props) {
 
   const [calculatedDeposit, setCalculatedDeposit] = useState(0);
 
+   // 상품 수량 변경 핸들러
   function productQuantityChangeHandler(event) {
-    const newQuantity = parseFloat(event.target.value);
-    console.log(event.target.value + "가져오나");
-    if (!isNaN(newQuantity)) {
-      const newDeposit = newQuantity * 100;
-      setCalculatedDeposit(newDeposit);
-    } else {
-      setCalculatedDeposit(0);
+    let newQuantity = event.target.value;
+    if (newQuantity === '') {
+      newQuantity = 0;
     }
+    const newDeposit = parseFloat(newQuantity) * 6000;
+    setCalculatedDeposit(newDeposit);
   }
 
   function submitHandler(event) {
@@ -222,23 +221,6 @@ function AddProducts(props) {
 
                 <Table className="text-nowrap">
                     <tr>
-                        <th scope="col" className='textCenter'>계약금</th>
-                        <th scope="col">
-                            <Form.Group className="mb-3" controlId="deposit">
-                            <Form.Control
-                            name="deposit"
-                            placeholder="계약금을 입력하세요" 
-                            // required=""
-                            // {...register('deposit', {
-                            //   required: true,
-                            // })}
-                            readOnly
-                            value={calculatedDeposit}
-                            />
-                            </Form.Group>
-                        </th>
-                    </tr>
-                    <tr>
                         <th scope="col" className='textCenter'>상품명</th>
                         <th scope="col">
                             <Form.Group className="mb-3" controlId="productName">
@@ -254,17 +236,34 @@ function AddProducts(props) {
                         </th>
                     </tr>
                     <tr>
-                        <th scope="col" className='textCenter'>상품수량</th>
+                        <th scope="col" className='textCenter'>수량</th>
                         <th scope="col">
                             <Form.Group className="mb-3" controlId="productQuantity">
                             <Form.Control 
                             name="productQuantity"
                             placeholder="삼품수량을 입력하세요" 
                             required="" 
-                            onChange={productQuantityChangeHandler}
                             {...register('productQuantity', {
                               required: true,
                             })}
+                            onChange={productQuantityChangeHandler} // 상품 수량 변경 핸들러
+                            />
+                            </Form.Group>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th scope="col" className='textCenter'>계약금</th>
+                        <th scope="col">
+                            <Form.Group className="mb-3" controlId="deposit">
+                            <Form.Control
+                            name="deposit"
+                            placeholder="계약금을 입력하세요" 
+                            required=""
+                            {...register('deposit', {
+                              required: true,
+                            })}
+                            readOnly
+                            value={calculatedDeposit}
                             />
                             </Form.Group>
                         </th>
@@ -325,7 +324,7 @@ function AddProducts(props) {
                 <div>
                     <section>
                         <h1>주의사항</h1>
-                        <p>1. 1일 이용료: 6,000원(1일) * pallet.수량 (*향후 출고 시 정산) </p>
+                        <p>1. 1일 이용료: 600원(1일) * pallet.수량 (*향후 출고 시 정산) </p>
                         <p>2. 출고요청은 최소 출고예정일 2주전까지 해주시기 바랍니다.</p>
                         <p>3. 운영시간(월~금, 09 ~ 06시) 외의 시간에 입/출고요청을 하실경우, 지연이 될 수 있습니다.</p>
                     </section>

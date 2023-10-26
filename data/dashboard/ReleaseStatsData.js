@@ -8,7 +8,7 @@ import {
 export const ReleaseStats = [
     {
        id:1,
-       title : "출고요청",
+       title : "입출고예정",
        value : 5,
        icon: <Briefcase size={18}/>,
        statInfo: '<span className="text-dark me-2">냉동 1 / 냉장 1 / 일반 3</span>' 
