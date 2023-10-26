@@ -104,18 +104,26 @@ function Estimate() {
     content = <p>연결 중...</p>;
   }
   return (
-    <React.Fragment>
+    // <React.Fragment>
+    //   <section>
+    //     <New OnAddList={addProductHandler} />
+    //   </section>
+    //   {/* <Container>
+    //     <PageHeading heading="견적사항" />
+    //     <section>
+    //       <button onClick={fetchHandler}>새로고침</button>
+    //     </section>
+    //     <section>{content}</section>
+    //   </Container> */}
+    // </React.Fragment>
+    
+    <Container fluid className="p-6">
+      {/* Page Heading */}
+      <PageHeading heading="견적 및 계약서 작성"/>
       <section>
         <New OnAddList={addProductHandler} />
       </section>
-      {/* <Container>
-        <PageHeading heading="견적사항" />
-        <section>
-          <button onClick={fetchHandler}>새로고침</button>
-        </section>
-        <section>{content}</section>
-      </Container> */}
-    </React.Fragment>
+    </Container>
   );
 }
 

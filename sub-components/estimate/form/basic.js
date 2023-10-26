@@ -323,6 +323,12 @@ function AddProducts(props) {
                     </tr> */}
                 </Table>
                 <div>
+                    <section>
+                        <h1>주의사항</h1>
+                        <p>1. 1일 이용료: 6,000원(1일) * pallet.수량 (*향후 출고 시 정산) </p>
+                        <p>2. 출고요청은 최소 출고예정일 2주전까지 해주시기 바랍니다.</p>
+                        <p>3. 운영시간(월~금, 09 ~ 06시) 외의 시간에 입/출고요청을 하실경우, 지연이 될 수 있습니다.</p>
+                    </section>
                     <div className="new-expense__actions">
                         <button type="button" onClick={props.onCancel}>
                             취소

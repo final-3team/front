@@ -35,29 +35,23 @@ const ContractProjects = () => {
                         <thead className="table-light">
                             <tr>
                                 <th>#</th>
-                                <th>업체명</th>
                                 <th>물품명</th>
                                 <th>수량</th>
                                 <th>창고</th>
                                 <th>상품분류</th>
                                 <th>계약일</th>
-                                <th>전화번호</th>
-                                <th>주소</th>
                            </tr>
                         </thead>
                         <tbody>
                             {showDataList.map((item, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td className="align-middle">{item.number}</td>
-                                        <td className="align-middle">{item.company}</td>
-                                        <td className="align-middle">{item.projectName}</td>
-                                        <td className="align-middle">{item.storing_quantity}</td>
-                                        <td className="align-middle">{item.location}</td>
-                                        <td className="align-middle">{item.classification}</td>
-                                        <td className="align-middle">{item.contract_day}</td>
-                                        <td className="align-middle">{item.phone}</td>
-                                        <td className="align-middle">{item.address}</td>
+                                        <td className="align-middle">{item.contractSeq}</td>
+                                        <td className="align-middle">{item.productName}</td>
+                                        <td className="align-middle">{item.productQuantity}</td>
+                                        <td className="align-middle">{item.warehouseArea}</td>
+                                        <td className="align-middle">{item.storeType}</td>
+                                        <td className="align-middle">{item.storeDate}</td>
 
 
 
