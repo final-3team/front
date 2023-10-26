@@ -19,8 +19,11 @@ const StatRightTopIcon = props => {
       async function getAndSetEstimates() { 
           const result = await getEstimates();
           console.log(result.json.data.contents.length);
-          setshowDataList(result.json.data.contents.length);
-  
+          if (info.title === "예상 비용") {
+          setshowDataList(result.json.data.contents.length*600*30);
+          } else {
+            setshowDataList(result.json.data.contents.length);
+          }
           // 리덕스를 이용해서 state에 값 설정
           dispatch(SET_ESTIMATES(result.json.data.contents.length));
       }

@@ -1,105 +1,98 @@
 'use client'
-import React from "react";
 import Link from 'next/link';
 import { Card, Dropdown } from 'react-bootstrap';
 import { MoreVertical } from 'react-feather';
+import React, { useState, useEffect, useCallback } from "react";
 import dynamic from 'next/dynamic';
+
+import { getEstimates } from "app/api/Estimate";
+import { useDispatch } from "react-redux";
+import { SET_ESTIMATES } from "redux/estimateSlice";
+
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 
-const Charts = () => {
-    const perfomanceChartSeries = [100, 78, 89];
+const Charts = () => {    
+    
+    const [showDataList, setshowDataList] = useState([]);
+  
+    const dispatch = useDispatch();
+  
+    useEffect(() => {
+      async function getAndSetEstimates() { 
+          const result = await getEstimates();
+          console.log(result.json.data.contents);
+          setshowDataList(result.json.data.contents);
+  
+          // 리덕스를 이용해서 state에 값 설정
+          dispatch(SET_ESTIMATES(result.json.data.contents));
+      }
+      getAndSetEstimates();
+    }, []);
+
+    const perfomanceChartSeries = [{
+        name: '냉장',
+        data: [44, 55, 87, 76]
+      }, {
+        name: '냉동',
+        data: [26, 85, 65, 68]
+      },  {
+        name: '실온',
+        data: [15, 41, 46, 76]
+      }];
     const perfomanceChartOptions = {
-        dataLabels: { enabled: !1 },
-        labels: ['Direct', 'Referral', 'Organic'],
-        colors: ['#28a745', '#ffc107', '#dc3545'],
-        plotOptions: {
-            radialBar: {
-                startAngle: -168,
-                endAngle: -450,
-                hollow: {
-                    size: '55%',
-                },
-                track: {
-                    background: 'transaprent',
-                },
-                dataLabels: {
-                    show: false,
-                }
-            }
+        chart: {
+        type: 'bar',
+        height: 350
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: '55%',
+          endingShape: 'rounded'
         },
-        chart: { type: 'radialBar' },
-        stroke: { lineCap: "round" },
-        responsive: [
-            {
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        height: 300
-                    }
-                }
-            },
-            {
-                breakpoint: 5000,
-                options: {
-                    chart: {
-                        height: 320
-                    }
-                }
-            }
-        ]
-    };
-
-    const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-        (<Link
-            href=""
-            ref={ref}
-            onClick={(e) => {
-                e.preventDefault();
-                onClick(e);
-            }}
-            className="text-muted text-primary-hover">
-            {children}
-        </Link>)
-    ));
-
-    CustomToggle.displayName = 'CustomToggle';
-
-    const ActionMenu = () => {
-        return (
-            <Dropdown>
-                <Dropdown.Toggle as={CustomToggle}>
-                    <MoreVertical size="15px" className="text-muted" />
-                </Dropdown.Toggle>
-                <Dropdown.Menu align={'end'}>
-                    <Dropdown.Item eventKey="1">
-                        Action
-                    </Dropdown.Item>
-                    <Dropdown.Item eventKey="2">
-                        Another action
-                    </Dropdown.Item>
-                    <Dropdown.Item eventKey="3">
-                        Something else here
-                    </Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
-        );
-    };
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        show: true,
+        width: 2,
+        colors: ['transparent']
+      },
+      xaxis: {
+        categories: ['SEOUL_A', 'SEOUL_B', 'BUSAN_A', 'BUSAN_B'],
+      },
+      yaxis: {
+        title: {
+          text: '계약률'
+        }
+      },
+      fill: {
+        opacity: 1
+      },
+      tooltip: {
+        y: {
+          formatter: function (val) {
+            return val + "% 사용중"
+          }
+        }
+      }
+      };
 
     return (
         <Card className="h-100">
             <Card.Body>
                 <div className="d-flex align-items-center justify-content-between">
                     <div>
-                        <h4 className="mb-0">Tasks Performance </h4>
+                        <h4 className="mb-0">창고 계약률</h4>
                     </div>
-                    <ActionMenu />
                 </div>
                 <div className="mb-8">
                     <Chart
                         options={perfomanceChartOptions}
                         series={perfomanceChartSeries}
-                        type="radialBar"
+                        type="bar"
                         width="100%"
                     />
                 </div>
@@ -107,18 +100,13 @@ const Charts = () => {
                 <div className="d-flex align-items-center justify-content-around">
                     <div className="text-center">
                         <i className="fe fe-check-circle text-success fs-3"></i>
-                        <h1 className="mt-3  mb-1 fw-bold">76%</h1>
-                        <p>Completed</p>
+                        <h1 className="mt-3  mb-1 fw-bold">76</h1>
+                        <p>당월 계약 건</p>
                     </div>
                     <div className="text-center">
                         <i className="fe fe-trending-up text-warning fs-3"></i>
                         <h1 className="mt-3  mb-1 fw-bold">32%</h1>
-                        <p>In-Progress</p>
-                    </div>
-                    <div className="text-center">
-                        <i className="fe fe-trending-down text-danger fs-3"></i>
-                        <h1 className="mt-3  mb-1 fw-bold">13%</h1>
-                        <p>Behind</p>
+                        <p>당월 계약 상승률</p>
                     </div>
                 </div>
             </Card.Body>

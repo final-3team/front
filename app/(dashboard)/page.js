@@ -44,6 +44,8 @@ const Home = () => {
                     })}
                 </Row>
                 <Nav className="nav nav-tabs nav-justified mt-6" id="myTab" role="tablist"></Nav>
+                {/* Example  */}
+                <TasksPerformance />
                 {/* Active Projects  */}
                 <ActiveProjects />
 

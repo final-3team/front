@@ -42,6 +42,12 @@ export const DashboardMenu = [
 	},
 	{
 		id: uuid(),
+		title: '창고 현황',
+		icon: 'zoom-in',
+		link: '/create/stock'
+	},
+	{
+		id: uuid(),
 		title: '',
 		grouptitle: true
 	},
@@ -64,13 +70,13 @@ export const DashboardMenu = [
 	{
 		id: uuid(),
 		title: '견적 및 계약서 작성',
-		icon: 'git-pull-request',
+		icon: 'file-text',
 		link: '/store-release/estimate-contract'
 	},
 	{
 		id: uuid(),
 		title: '현황',
-		icon: 'corner-left-down',
+		icon: 'clipboard',
 		children: [
 			{
 				id: uuid(),
@@ -86,15 +92,27 @@ export const DashboardMenu = [
 	},	
 	{
 		id: uuid(),
-		title: '창고관리',
+		title: '커뮤니티',
 		grouptitle: true
 	},	
 	{
 		id: uuid(),
 		title: '공지사항',
-		icon: 'git-pull-request',
+		icon: 'volume-2',
 		link: '/notice'
+	},
+	{
+		id: uuid(),
+		title: '문의사항',
+		icon: 'user-check',
+		link: '/qna'
 	}
+	// {
+	// 	id: uuid(),
+	// 	title: 'pdf 임시',
+	// 	icon: 'user-check',
+	// 	link: '/pages/contract'
+	// }
 	// },
 	// {
 	// 	id: uuid(),

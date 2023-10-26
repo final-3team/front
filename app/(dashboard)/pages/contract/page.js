@@ -157,7 +157,7 @@ const Contract = () => {
             <br />
             <br />
             <br />
-            <a href="/pages/current/contract">계약 완료</a>
+            <a href="/store-release/status/contract">계약 완료</a>
           </section>
         </div>
         <button onClick={onClick}>pdf로 보기</button>

@@ -5,14 +5,27 @@ import { ProgressBar, Col, Row, Card, Table, Image } from 'react-bootstrap';
 
 import { getEstimates } from "app/api/Estimate";
 import { useDispatch } from "react-redux";
+import { useRouter } from 'next/navigation';
 import { SET_ESTIMATES } from "redux/estimateSlice";
 
 const ContractProjects = () => {
-
     const [showDataList, setshowDataList] = useState([]);
-  
     const dispatch = useDispatch();
-  
+    const dataToSend = {
+        showDataList: showDataList // 원하는 데이터 추가
+        // 다른 데이터도 필요한 경우 추가
+    };
+    const linkHref = "/pages/contract";
+    const queryParams = { data: JSON.stringify(dataToSend) }; // 데이터를 JSON 문자열로 변환하여 전달
+
+    const router = useRouter();
+    const currentPath = router.pathname;
+    // Next.js의 router를 사용하여 다른 페이지로 이동
+    // router.push({
+    //     pathname: linkHref,
+    //     query: queryParams,
+    // });
+
     useEffect(() => {
       async function getAndSetEstimates() { 
           const result = await getEstimates();
@@ -23,7 +36,7 @@ const ContractProjects = () => {
           dispatch(SET_ESTIMATES(result.json.data.contents));
       }
       getAndSetEstimates();
-  }, []);
+    }, []);
     return (
         <Row className="mt-6">
             <Col md={12} xs={12}>
@@ -35,12 +48,13 @@ const ContractProjects = () => {
                         <thead className="table-light">
                             <tr>
                                 <th>#</th>
-                                <th>물품명</th>
-                                <th>수량</th>
-                                <th>창고</th>
-                                <th>상품분류</th>
-                                <th>계약일</th>
-                                <th>상태</th>
+                                <th className="textCenter">물품명</th>
+                                <th className="textCenter">수량</th>
+                                <th className="textCenter">창고</th>
+                                <th className="textCenter">상품분류</th>
+                                <th className="textCenter">계약일</th>
+                                <th className="textCenter">상태</th>
+                                <th className="textCenter"> </th>
                            </tr>
                         </thead>
                         <tbody>
@@ -63,11 +77,14 @@ const ContractProjects = () => {
                                             {item.contractStatus === "BEFORE_CONTRACT" ? "진행중" :
                                             item.contractStatus === "COMPLETE_CONTRACT" ? "입고" : null}
                                         </td>
-
-
-
-
-
+                                        <td className="align-middle">
+                                            <Link href={{ pathname: linkHref, query: queryParams }}>
+                                                PDF 변환
+                                            </Link>
+                                        </td>
+                                        {/* <td className="align-middle">
+                                            <button onClick={handleButtonClick}>PDF 변환</button>
+                                        </td> */}
                                     </tr>
                                 )
                             })}
